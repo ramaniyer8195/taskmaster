@@ -1,10 +1,20 @@
 import express from "express";
 import mongoose from "mongoose";
+import userRouter from "./routes/userRoutes";
+import topicRouter from "./routes/topicRoutes";
+import itemRouter from "./routes/itemRoutes";
+import statsRouter from "./routes/statsRoutes";
 
 const port = 5000 || process.env.PORT;
 const app = express();
 
 app.use(express.json());
+
+// routes
+app.use("/api/user", userRouter);
+app.use("/api/topic", topicRouter);
+app.use("/api/item", itemRouter);
+app.use("/api/stats", statsRouter);
 
 mongoose
   .connect(process.env.MONGO_URI || "")
