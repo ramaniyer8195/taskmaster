@@ -1,11 +1,11 @@
 import { Types } from "mongoose";
-import { User } from "../interfaces/frontendSchema";
+import { Topic, User } from "../interfaces/frontendSchema";
 
-// User Routes Types
 export interface ControllerErrors {
   [key: string]: string;
 }
 
+// User Routes Types
 export interface SignupReq {
   name: string;
   email: string;
@@ -61,5 +61,51 @@ export interface changePasswordReq {
 
 export interface changePasswordRes {
   message: string;
+  error: ControllerErrors;
+}
+
+// Topic Routes Types
+export interface GetTopicsRes {
+  data: Topic[] | null;
+  error: any;
+}
+
+export interface GetTopicParams {
+  topicId: string;
+}
+
+export interface GetTopicRes {
+  data: Topic | null;
+  error: ControllerErrors;
+}
+
+export interface ModifyTopicReq {
+  topicId: string;
+  title?: string;
+  color?: string;
+}
+
+export interface ModifyTopicRes {
+  message: string;
+  error: ControllerErrors;
+}
+
+export interface DeleteTopicReq {
+  topicId: string;
+}
+
+export interface DeleteTopicRes {
+  message: string;
+  data: Topic | null;
+  error: ControllerErrors;
+}
+
+export interface AddTopicReq {
+  title: string;
+  color: string;
+}
+
+export interface AddTopicRes {
+  data: Types.ObjectId | null;
   error: ControllerErrors;
 }
