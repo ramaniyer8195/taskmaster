@@ -1,5 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
+import "dotenv/config";
+import cookieParser from "cookie-parser";
 import userRouter from "./routes/userRoutes";
 import topicRouter from "./routes/topicRoutes";
 import itemRouter from "./routes/itemRoutes";
@@ -9,6 +11,7 @@ const port = 5000 || process.env.PORT;
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 // routes
 app.use("/api/user", userRouter);
