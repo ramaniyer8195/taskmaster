@@ -29,10 +29,7 @@ import { ValidationErrors } from "../interfaces/schema";
 import { createJwt } from "../utils/utils";
 import { COOKIE_MAX_AGE } from "../constants/constants";
 
-export const getUser: RequestHandler<{}, GetUserRes, {}, {}> = async (
-  req,
-  res
-) => {
+export const getUser: RequestHandler<{}, GetUserRes> = async (req, res) => {
   const token = req.cookies.jwt;
 
   const decodedToken = jwt.decode(token, { complete: true });
@@ -62,7 +59,7 @@ export const getUser: RequestHandler<{}, GetUserRes, {}, {}> = async (
   }
 };
 
-export const signup: RequestHandler<{}, SignupRes, SignupReq, {}> = async (
+export const signup: RequestHandler<{}, SignupRes, SignupReq> = async (
   req,
   res
 ) => {
@@ -94,7 +91,7 @@ export const signup: RequestHandler<{}, SignupRes, SignupReq, {}> = async (
   }
 };
 
-export const signin: RequestHandler<{}, SigninRes, SigninReq, {}> = async (
+export const signin: RequestHandler<{}, SigninRes, SigninReq> = async (
   req,
   res
 ) => {
@@ -192,12 +189,10 @@ export const generateOtp: RequestHandler = async (req, res) => {
   }
 };
 
-export const verifyOtp: RequestHandler<
-  {},
-  VerifyOtpRes,
-  VerifyOtpReq,
-  {}
-> = async (req, res) => {
+export const verifyOtp: RequestHandler<{}, VerifyOtpRes, VerifyOtpReq> = async (
+  req,
+  res
+) => {
   const { otp } = req.body;
   const token = req.cookies.jwt;
 
@@ -233,8 +228,7 @@ export const verifyOtp: RequestHandler<
 export const changeDetails: RequestHandler<
   {},
   updateDetailsRes,
-  updateDetailsReq,
-  {}
+  updateDetailsReq
 > = async (req, res) => {
   const { name, avatar } = req.body;
   const token = req.cookies.jwt;
@@ -279,8 +273,7 @@ export const changeDetails: RequestHandler<
 export const changePassword: RequestHandler<
   {},
   changePasswordRes,
-  changePasswordReq,
-  {}
+  changePasswordReq
 > = async (req, res) => {
   const { oldPassword, newPassword, confirmPassword } = req.body;
   const token = req.cookies.jwt;

@@ -13,3 +13,10 @@ export const USER_ERRORS = {
   NOTHING_TO_UPDATE: "Nothing to update",
   OLD_NEW_SAME: "Old and new password cannot be the same",
 };
+
+export const TOPIC_ERRORS = {
+  NO_TITLE: "Please enter a title",
+  NO_COLOR: "Please enter a color",
+  DOESNT_EXIST: "Topic does not exist",
+  NOTHING_TO_UPDATE: "Nothing to update",
+};

@@ -2,12 +2,12 @@ import { USER_ERRORS } from "../constants/errors";
 import { ControllerErrors } from "../interfaces/controllers";
 import { ValidationErrors } from "../interfaces/schema";
 
-// User Error Handlers
 const handleValidationErrors = (
+  model: string,
   err: ValidationErrors,
   errors: ControllerErrors
 ): ControllerErrors => {
-  if (err.message.includes("User validation failed")) {
+  if (err.message.includes(`${model} validation failed`)) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
     });
@@ -16,6 +16,7 @@ const handleValidationErrors = (
   return errors;
 };
 
+// User Error Handlers
 export const handleSignupErrors = (err: ValidationErrors): ControllerErrors => {
   let errors: { [key: string]: string } = {
     name: "",
@@ -30,7 +31,7 @@ export const handleSignupErrors = (err: ValidationErrors): ControllerErrors => {
     return errors;
   }
 
-  errors = handleValidationErrors(err, errors);
+  errors = handleValidationErrors("User", err, errors);
   return errors;
 };
 
@@ -40,7 +41,7 @@ export const handleSigninErrors = (err: ValidationErrors): ControllerErrors => {
     password: "",
   };
 
-  errors = handleValidationErrors(err, errors);
+  errors = handleValidationErrors("User", err, errors);
   return errors;
 };
 
@@ -51,7 +52,7 @@ export const handleGetUserErrors = (
     user: "",
   };
 
-  errors = handleValidationErrors(err, errors);
+  errors = handleValidationErrors("User", err, errors);
   return errors;
 };
 
@@ -62,7 +63,7 @@ export const handleVerifyOtpErrors = (
     otp: "",
   };
 
-  errors = handleValidationErrors(err, errors);
+  errors = handleValidationErrors("User", err, errors);
   return errors;
 };
 
@@ -73,7 +74,7 @@ export const handleChangeDetailsErrors = (
     update: "",
   };
 
-  errors = handleValidationErrors(err, errors);
+  errors = handleValidationErrors("User", err, errors);
   return errors;
 };
 
@@ -86,6 +87,53 @@ export const handleChangePasswordErrors = (
     confirmPassword: "",
   };
 
-  errors = handleValidationErrors(err, errors);
+  errors = handleValidationErrors("User", err, errors);
+  return errors;
+};
+
+// Topic Error Handlers
+export const handleGetTopicErrors = (
+  err: ValidationErrors
+): ControllerErrors => {
+  let errors: { [key: string]: string } = {
+    topic: "",
+  };
+
+  errors = handleValidationErrors("Topic", err, errors);
+  return errors;
+};
+
+export const handleModifyTopicErrors = (
+  err: ValidationErrors
+): ControllerErrors => {
+  let errors: { [key: string]: string } = {
+    topic: "",
+    update: "",
+  };
+
+  errors = handleValidationErrors("Topic", err, errors);
+  return errors;
+};
+
+export const handleDeleteTopicErrors = (
+  err: ValidationErrors
+): ControllerErrors => {
+  let errors: { [key: string]: string } = {
+    topic: "",
+  };
+
+  errors = handleValidationErrors("Topic", err, errors);
+  return errors;
+};
+
+export const handleAddTopicErrors = (
+  err: ValidationErrors
+): ControllerErrors => {
+  let errors: { [key: string]: string } = {
+    title: "",
+    color: "",
+  };
+
+  errors = handleValidationErrors("Topic", err, errors);
   return errors;
 };

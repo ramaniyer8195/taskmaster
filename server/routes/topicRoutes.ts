@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/getTopics", getTopics);
-router.get("/getTopic", getTopic);
+router.get("/getTopic/:topicId", getTopic);
 router.put("/modifyTopic", modifyTopic);
 router.delete("/deleteTopic", deleteTopic);
 router.post("/addTopic", addTopic);
