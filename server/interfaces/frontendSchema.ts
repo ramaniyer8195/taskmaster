@@ -1,11 +1,12 @@
-import { Content, LoginMethod } from "./schema";
+import { Types } from "mongoose";
+import { Content } from "./schema";
 
 export interface User {
-  _id: string;
+  _id: Types.ObjectId;
   name: string;
   email: string;
   avatar: string;
-  loginMethod: LoginMethod;
+  loginMethod: "email" | "google" | "facebook" | "twitter" | "linkedin";
   isVerified: boolean;
   isConnected: boolean;
   createdAt: Date;
@@ -13,13 +14,13 @@ export interface User {
 }
 
 export interface Topic {
-  _id: string;
+  _id: Types.ObjectId;
   title: string;
   color: string;
 }
 
 export interface Note {
-  _id: string;
+  _id: Types.ObjectId;
   title: string;
   content: string;
   createdAt: Date;
@@ -32,7 +33,7 @@ export interface Note {
 }
 
 export interface Todo {
-  _id: string;
+  _id: Types.ObjectId;
   title: string;
   content: Content[];
   createdAt: Date;

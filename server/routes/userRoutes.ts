@@ -9,16 +9,17 @@ import {
   signup,
   verifyOtp,
 } from "../controllers/userController";
+import { requireAuth } from "../middlewares/auth";
 
 const router = express.Router();
 
-router.get("/getUser", getUser);
+router.get("/getUser", requireAuth, getUser);
 router.post("/signup", signup);
 router.post("/signin", signin);
-router.post("/signout", signout);
-router.get("/generateOtp", generateOtp);
-router.post("/verifyOtp", verifyOtp);
-router.put("/changeDetails", changeDetails);
-router.post("/changePassword", changePassword);
+router.get("/signout", signout);
+router.get("/generateOtp", requireAuth, generateOtp);
+router.post("/verifyOtp", requireAuth, verifyOtp);
+router.put("/changeDetails", requireAuth, changeDetails);
+router.put("/changePassword", requireAuth, changePassword);
 
 export default router;
