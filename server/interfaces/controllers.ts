@@ -109,3 +109,12 @@ export interface AddTopicRes {
   data: Types.ObjectId | null;
   error: ControllerErrors;
 }
+
+// Stats Routes Types
+export interface GetStatsRes {
+  data: {
+    users: number;
+    notes: number;
+    todos: number;
+  };
+}
