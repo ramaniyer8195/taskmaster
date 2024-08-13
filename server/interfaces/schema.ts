@@ -1,20 +1,12 @@
 import { Types } from "mongoose";
 
 // User Schema Types
-export enum LoginMethod {
-  EMAIL = "email",
-  GOOGLE = "google",
-  FACEBOOK = "facebook",
-  TWITTER = "twitter",
-  LINKEDIN = "linkedin",
-}
-
 export interface IUser {
   name: string;
   email: string;
   password: string;
   avatar: string;
-  loginMethod: LoginMethod;
+  loginMethod: "email" | "google" | "facebook" | "twitter" | "linkedin";
   isVerified: boolean;
   isConnected: boolean;
   createdAt: Date;
@@ -67,4 +59,10 @@ export interface ITodo {
   isArchived: boolean;
   isFavourite: boolean;
   topicId: Types.ObjectId;
+}
+
+export interface ValidationErrors {
+  code?: number;
+  message: string;
+  errors: { [key: string]: { properties: { path: string; message: string } } };
 }
