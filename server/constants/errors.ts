@@ -20,3 +20,9 @@ export const TOPIC_ERRORS = {
   DOESNT_EXIST: "Topic does not exist",
   NOTHING_TO_UPDATE: "Nothing to update",
 };
+
+export const ITEM_ERRORS = {
+  DOESNT_EXIST: "Item does not exist",
+  NOTHING_TO_UPDATE: "Nothing to update",
+  NO_TITLE: "Please enter a title",
+};

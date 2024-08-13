@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
-import { Topic, User } from "../interfaces/frontendSchema";
+import { Note, Todo, Topic, User } from "../interfaces/frontendSchema";
+import { Content } from "./schema";
 
 export interface ControllerErrors {
   [key: string]: string;
@@ -117,4 +118,59 @@ export interface GetStatsRes {
     notes: number;
     todos: number;
   };
+}
+
+// Items Routes Types
+export interface GetItemsRes {
+  data: (Note | Todo)[];
+}
+
+export interface GetItemsQuery {
+  topicId?: string;
+  isArchived?: boolean;
+  isFavourite?: boolean;
+  isDeleted?: boolean;
+  search?: string;
+}
+
+export interface DeleteItemReq {
+  itemId: string;
+  type: "note" | "todo";
+}
+
+export interface DeleteItemRes {
+  message: string;
+  data: Note | Todo | null;
+  error: ControllerErrors;
+}
+
+export interface AddItemReq {
+  title: string;
+  topicId?: string;
+  type: "note" | "todo";
+}
+
+export interface AddItemRes {
+  data: Types.ObjectId | null;
+  error: ControllerErrors;
+}
+
+export interface ModifyItemReqData {
+  title?: string;
+  topicId?: string;
+  content?: string | Content[];
+  isFavourite?: boolean;
+  isDeleted?: boolean;
+  isArchived?: boolean;
+}
+
+export interface ModifyItemReq {
+  data: ModifyItemReqData;
+  type: "note" | "todo";
+  itemId: string;
+}
+
+export interface ModifyItemRes {
+  message: string;
+  error: ControllerErrors;
 }
