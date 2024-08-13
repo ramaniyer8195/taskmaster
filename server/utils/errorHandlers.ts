@@ -137,3 +137,51 @@ export const handleAddTopicErrors = (
   errors = handleValidationErrors("Topic", err, errors);
   return errors;
 };
+
+// Item Error Handlers
+export const handleDeleteNoteErrors = (
+  err: ValidationErrors
+): ControllerErrors => {
+  let errors: { [key: string]: string } = {
+    note: "",
+  };
+
+  errors = handleValidationErrors("Note", err, errors);
+  return errors;
+};
+
+export const handleDeleteTodoErrors = (
+  err: ValidationErrors
+): ControllerErrors => {
+  let errors: { [key: string]: string } = {
+    todo: "",
+  };
+
+  errors = handleValidationErrors("Todo", err, errors);
+  return errors;
+};
+export const handleAddItemErrors = (
+  err: ValidationErrors,
+  type: "note" | "todo"
+): ControllerErrors => {
+  let errors: { [key: string]: string } = {
+    title: "",
+  };
+  const schema = type === "note" ? "Note" : "Todo";
+
+  errors = handleValidationErrors(schema, err, errors);
+  return errors;
+};
+export const handleModifyItemErrors = (
+  err: ValidationErrors,
+  type: "note" | "todo"
+): ControllerErrors => {
+  let errors: { [key: string]: string } = {
+    title: "",
+    update: "",
+  };
+  const schema = type === "note" ? "Note" : "Todo";
+
+  errors = handleValidationErrors(schema, err, errors);
+  return errors;
+};
