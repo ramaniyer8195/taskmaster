@@ -4,6 +4,9 @@ import emptyHomeTab from "../../assets/empty_home_tab.svg";
 import { MouseEvent, useState } from "react";
 import SearchBar from "./SearchBar";
 import AddItemModal from "../modals/AddItemModal";
+import NoteCard from "./NoteCard";
+import TodoCard from "./TodoCard";
+import { Note, Todo } from "@/interfaces/api";
 
 const HomeTab = ({ topics, items }: HomeTabProps) => {
   const [selected, setSelected] = useState("All");
@@ -15,6 +18,35 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
 
   const handleSearch = (searchString: string) => {
     console.log(searchString);
+  };
+
+  const isNote = (item: Note | Todo): item is Note => {
+    if (item.type === "note") return true;
+    return false;
+  };
+
+  const handleArchive = (id: string, isArchived: boolean) => {
+    console.log(id, isArchived);
+  };
+
+  const handleDelete = (id: string, isDeleted: boolean) => {
+    console.log(id, isDeleted);
+  };
+
+  const handleEdit = (id: string, content: string) => {
+    console.log(id, content);
+  };
+
+  const handleFavourite = (id: string, isFavourite: boolean) => {
+    console.log(id, isFavourite);
+  };
+
+  const handlePermanentDelete = (id: string) => {
+    console.log(id);
+  };
+
+  const handleTopicUpdate = (id: string, topicId: string) => {
+    console.log(id, topicId);
   };
 
   return (
@@ -54,6 +86,39 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
             <div className="font-display text-3xl font-bold text-center">
               Click on Add New to add your first item
             </div>
+          </div>
+        )}
+        {items.length && (
+          <div className="grid grid-cols-3 gap-4">
+            {items.map((item) => {
+              if (isNote(item)) {
+                return (
+                  <NoteCard
+                    key={item._id}
+                    note={item}
+                    handleArchive={handleArchive}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                    handleFavourite={handleFavourite}
+                    handlePermanentDelete={handlePermanentDelete}
+                    handleTopicUpdate={handleTopicUpdate}
+                  />
+                );
+              } else {
+                return (
+                  <TodoCard
+                    key={item._id}
+                    todo={item}
+                    handleArchive={handleArchive}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                    handleFavourite={handleFavourite}
+                    handlePermanentDelete={handlePermanentDelete}
+                    handleTopicUpdate={handleTopicUpdate}
+                  />
+                );
+              }
+            })}
           </div>
         )}
       </div>

@@ -7,6 +7,7 @@ import RecentlyDeletedTab from "@/components/dashboard/RecentlyDeletedTab";
 import ArchiveTab from "@/components/dashboard/ArchiveTab";
 import SettingsTab from "@/components/dashboard/SettingsTab";
 import { TOPIC_COLORS } from "@/constants/constants";
+import { DUMMY_NOTE, DUMMY_TODO } from "@/constants/tempData";
 
 const Dashboard = () => {
   const [selected, setSelected] = useState(Menu.HOME);
@@ -34,7 +35,9 @@ const Dashboard = () => {
         />
       </div>
       <div className="w-[85%] h-full pt-5 px-5">
-        {selected === Menu.HOME && <HomeTab topics={topics} items={[]} />}
+        {selected === Menu.HOME && (
+          <HomeTab topics={topics} items={[DUMMY_NOTE, DUMMY_TODO]} />
+        )}
         {selected === Menu.FAVOURITES && <FavouritesTab items={[]} />}
         {selected === Menu.RECENTLY_DELETED && (
           <RecentlyDeletedTab items={[]} />
