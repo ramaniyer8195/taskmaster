@@ -14,3 +14,7 @@ export enum Socials {
 export interface SocialButtonProps {
   type: Socials;
 }
+
+export interface SearchBarProps {
+  handleSearch: (searchString: string) => void;
+}
