@@ -1,7 +1,28 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = [
+  "electricBlue",
+  "emeraldGreen",
+  "darkTeal",
+  "softGold",
+  "royalPurple",
+  "crimsonRed",
+  "turquoise",
+  "slateGrey",
+  "deepSeaBlue",
+  "limeGreen",
+  "darkPlum",
+  "charcoal",
+];
+const utilities = ["bg", "border"];
+
+const safelist = colors.flatMap((color) =>
+  utilities.map((utility) => `${utility}-${color}`)
+);
+
 module.exports = {
   darkMode: ["class"],
-  content: ["./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{ts,tsx}", "index.html"],
   prefix: "",
   theme: {
     container: {
@@ -84,5 +105,6 @@ module.exports = {
       display: ["Advent Pro", "sans-serif"],
     },
   },
+  safelist,
   plugins: [require("tailwindcss-animate")],
 };
