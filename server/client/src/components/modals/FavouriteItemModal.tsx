@@ -1,3 +1,4 @@
+import { FaHeartCirclePlus } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -7,20 +8,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { ArchiveItemModalProps } from "@/interfaces/modals";
-import { RiInboxUnarchiveFill } from "react-icons/ri";
+import { FavouriteItemModalProps } from "@/interfaces/modals";
 
-const UnarchiveItemModal = ({
+const FavouriteItemModal = ({
   open,
   setOpen,
   id,
   type,
-  handleArchive,
-}: ArchiveItemModalProps) => {
-  const handleUnarchiveItem = () => {
-    console.log(`Unarchived Item`);
+  handleFavourite,
+}: FavouriteItemModalProps) => {
+  const handleFavouriteItem = () => {
+    console.log(`Favourited Item`);
     setOpen(false);
-    handleArchive(id, false);
+    handleFavourite(id, true);
   };
 
   const handleClose = () => {
@@ -30,19 +30,23 @@ const UnarchiveItemModal = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <RiInboxUnarchiveFill className="cursor-pointer" />
+        <FaHeartCirclePlus className="cursor-pointer" />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] border-primary border-t-8">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-bold">
-            Unarchive {type}
+            Favourite {type}
           </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <p>Are you sure you want to unarchive this {type}?</p>
+          <p>
+            Favourited items will be visible in your dashboard. Access all
+            favourited items in the favourite tab.
+          </p>
+          <p>Are you sure you want to favourite this {type}?</p>
         </div>
         <DialogFooter>
-          <Button type="submit" onClick={handleUnarchiveItem}>
+          <Button type="submit" onClick={handleFavouriteItem}>
             Yes
           </Button>
           <Button variant="outline" onClick={handleClose}>
@@ -54,4 +58,4 @@ const UnarchiveItemModal = ({
   );
 };
 
-export default UnarchiveItemModal;
+export default FavouriteItemModal;

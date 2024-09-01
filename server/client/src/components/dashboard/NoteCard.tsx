@@ -10,19 +10,21 @@ import {
 import { Fragment } from "react/jsx-runtime";
 import { FaEdit, FaEye, FaStickyNote } from "react-icons/fa";
 import { formatDate } from "@/utils/dateUtils";
-import { FaHeartCircleMinus, FaHeartCirclePlus } from "react-icons/fa6";
 import { useState } from "react";
 import DeleteItemModal from "../modals/DeleteItemModal";
 import RestoreItemModal from "../modals/RestoreItemModal";
 import DeletePermanentlyModal from "../modals/DeletePermanentlyModal";
 import UnarchiveItemModal from "../modals/UnarchiveItemModal";
 import ArchiveItemModal from "../modals/ArchiveItemModal";
+import UnfavouriteItemModal from "../modals/UnfavouriteItemModal";
+import FavouriteItemModal from "../modals/FavouriteItemModal";
 
 const NoteCard = ({
   note,
   handleDelete,
   handlePermanentDelete,
   handleArchive,
+  handleFavourite,
 }: NoteCardProps) => {
   const [showFooter, setShowFooter] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -31,6 +33,8 @@ const NoteCard = ({
     useState(false);
   const [openArchiveModal, setOpenArchiveModal] = useState(false);
   const [openUnarchiveModal, setOpenUnarchiveModal] = useState(false);
+  const [openFavouriteModal, setOpenFavouriteModal] = useState(false);
+  const [openUnfavouriteModal, setOpenUnfavouriteModal] = useState(false);
   const { isArchived, isDeleted, isFavourite } = note;
 
   return (
@@ -100,9 +104,21 @@ const NoteCard = ({
           )}
           {!isDeleted ? (
             isFavourite ? (
-              <FaHeartCircleMinus className="cursor-pointer" />
+              <UnfavouriteItemModal
+                open={openUnfavouriteModal}
+                setOpen={setOpenUnfavouriteModal}
+                id={note._id}
+                type={note.type}
+                handleFavourite={handleFavourite}
+              />
             ) : (
-              <FaHeartCirclePlus className="cursor-pointer" />
+              <FavouriteItemModal
+                open={openFavouriteModal}
+                setOpen={setOpenFavouriteModal}
+                id={note._id}
+                type={note.type}
+                handleFavourite={handleFavourite}
+              />
             )
           ) : (
             <></>

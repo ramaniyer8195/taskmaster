@@ -39,3 +39,7 @@ export interface DeletePermanentlyModalProps extends ItemModalProps {
 export interface ArchiveItemModalProps extends ItemModalProps {
   handleArchive: (id: string, isArchived: boolean) => void;
 }
+
+export interface FavouriteItemModalProps extends ItemModalProps {
+  handleFavourite: (id: string, isFavourite: boolean) => void;
+}

@@ -10,7 +10,6 @@ import {
 import { FaEdit } from "react-icons/fa";
 import { formatDate } from "@/utils/dateUtils";
 import { RiTodoFill } from "react-icons/ri";
-import { FaHeartCircleMinus, FaHeartCirclePlus } from "react-icons/fa6";
 import { useState } from "react";
 import { getContent } from "@/utils/todoUtils";
 import DeleteItemModal from "../modals/DeleteItemModal";
@@ -18,12 +17,15 @@ import RestoreItemModal from "../modals/RestoreItemModal";
 import DeletePermanentlyModal from "../modals/DeletePermanentlyModal";
 import UnarchiveItemModal from "../modals/UnarchiveItemModal";
 import ArchiveItemModal from "../modals/ArchiveItemModal";
+import UnfavouriteItemModal from "../modals/UnfavouriteItemModal";
+import FavouriteItemModal from "../modals/FavouriteItemModal";
 
 const TodoCard = ({
   todo,
   handleDelete,
   handlePermanentDelete,
   handleArchive,
+  handleFavourite,
 }: TodoCardProps) => {
   const [showFooter, setShowFooter] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -32,6 +34,8 @@ const TodoCard = ({
     useState(false);
   const [openArchiveModal, setOpenArchiveModal] = useState(false);
   const [openUnarchiveModal, setOpenUnarchiveModal] = useState(false);
+  const [openFavouriteModal, setOpenFavouriteModal] = useState(false);
+  const [openUnfavouriteModal, setOpenUnfavouriteModal] = useState(false);
   const { isArchived, isDeleted, isFavourite } = todo;
 
   return (
@@ -93,9 +97,21 @@ const TodoCard = ({
           )}
           {!isDeleted ? (
             isFavourite ? (
-              <FaHeartCircleMinus className="cursor-pointer" />
+              <UnfavouriteItemModal
+                open={openUnfavouriteModal}
+                setOpen={setOpenUnfavouriteModal}
+                id={todo._id}
+                type={todo.type}
+                handleFavourite={handleFavourite}
+              />
             ) : (
-              <FaHeartCirclePlus className="cursor-pointer" />
+              <FavouriteItemModal
+                open={openFavouriteModal}
+                setOpen={setOpenFavouriteModal}
+                id={todo._id}
+                type={todo.type}
+                handleFavourite={handleFavourite}
+              />
             )
           ) : (
             <></>
