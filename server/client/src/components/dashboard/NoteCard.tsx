@@ -8,20 +8,29 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Fragment } from "react/jsx-runtime";
-import {
-  FaEdit,
-  FaEye,
-  FaStickyNote,
-  FaTrash,
-  FaTrashRestore,
-} from "react-icons/fa";
+import { FaEdit, FaEye, FaStickyNote } from "react-icons/fa";
 import { formatDate } from "@/utils/dateUtils";
-import { RiInboxArchiveFill, RiInboxUnarchiveFill } from "react-icons/ri";
 import { FaHeartCircleMinus, FaHeartCirclePlus } from "react-icons/fa6";
 import { useState } from "react";
+import DeleteItemModal from "../modals/DeleteItemModal";
+import RestoreItemModal from "../modals/RestoreItemModal";
+import DeletePermanentlyModal from "../modals/DeletePermanentlyModal";
+import UnarchiveItemModal from "../modals/UnarchiveItemModal";
+import ArchiveItemModal from "../modals/ArchiveItemModal";
 
-const NoteCard = ({ note }: NoteCardProps) => {
+const NoteCard = ({
+  note,
+  handleDelete,
+  handlePermanentDelete,
+  handleArchive,
+}: NoteCardProps) => {
   const [showFooter, setShowFooter] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openRestoreModal, setOpenRestoreModal] = useState(false);
+  const [openPermanentDeleteModal, setOpenPermanentDeleteModal] =
+    useState(false);
+  const [openArchiveModal, setOpenArchiveModal] = useState(false);
+  const [openUnarchiveModal, setOpenUnarchiveModal] = useState(false);
   const { isArchived, isDeleted, isFavourite } = note;
 
   return (
@@ -59,12 +68,32 @@ const NoteCard = ({ note }: NoteCardProps) => {
         >
           {!isDeleted && <FaEdit className="cursor-pointer" />}
           {!isDeleted && <FaEye className="cursor-pointer" />}
-          {!isDeleted && <FaTrash className="cursor-pointer" />}
+          {!isDeleted && (
+            <DeleteItemModal
+              open={openDeleteModal}
+              setOpen={setOpenDeleteModal}
+              id={note._id}
+              type={note.type}
+              handleDelete={handleDelete}
+            />
+          )}
           {!isDeleted ? (
             isArchived ? (
-              <RiInboxUnarchiveFill className="cursor-pointer" />
+              <UnarchiveItemModal
+                open={openUnarchiveModal}
+                setOpen={setOpenUnarchiveModal}
+                id={note._id}
+                type={note.type}
+                handleArchive={handleArchive}
+              />
             ) : (
-              <RiInboxArchiveFill className="cursor-pointer" />
+              <ArchiveItemModal
+                open={openArchiveModal}
+                setOpen={setOpenArchiveModal}
+                id={note._id}
+                type={note.type}
+                handleArchive={handleArchive}
+              />
             )
           ) : (
             <></>
@@ -78,8 +107,24 @@ const NoteCard = ({ note }: NoteCardProps) => {
           ) : (
             <></>
           )}
-          {isDeleted && <FaTrashRestore className="cursor-pointer" />}
-          {isDeleted && <FaTrash className="cursor-pointer" />}
+          {isDeleted && (
+            <RestoreItemModal
+              open={openRestoreModal}
+              setOpen={setOpenRestoreModal}
+              id={note._id}
+              type={note.type}
+              handleDelete={handleDelete}
+            />
+          )}
+          {isDeleted && (
+            <DeletePermanentlyModal
+              open={openPermanentDeleteModal}
+              setOpen={setOpenPermanentDeleteModal}
+              id={note._id}
+              type={note.type}
+              handlePermanentDelete={handlePermanentDelete}
+            />
+          )}
         </div>
       </CardFooter>
     </Card>

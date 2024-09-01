@@ -7,7 +7,12 @@ import RecentlyDeletedTab from "@/components/dashboard/RecentlyDeletedTab";
 import ArchiveTab from "@/components/dashboard/ArchiveTab";
 import SettingsTab from "@/components/dashboard/SettingsTab";
 import { TOPIC_COLORS } from "@/constants/constants";
-import { DUMMY_NOTE, DUMMY_TODO } from "@/constants/tempData";
+import {
+  DUMMY_NOTE_1,
+  DUMMY_NOTE_2,
+  DUMMY_TODO_1,
+  DUMMY_TODO_2,
+} from "@/constants/tempData";
 
 const Dashboard = () => {
   const [selected, setSelected] = useState(Menu.HOME);
@@ -25,7 +30,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="w-[100vw] h-[100vh] flex justify-between">
+    <div className="w-[97vw] h-[100vh] flex justify-between">
       <div className="min-w-[15%] pt-5 bg-muted relative">
         <Sidebar
           handleMenuChange={handleMenuChange}
@@ -36,7 +41,10 @@ const Dashboard = () => {
       </div>
       <div className="w-[85%] h-full pt-5 px-5">
         {selected === Menu.HOME && (
-          <HomeTab topics={topics} items={[DUMMY_NOTE, DUMMY_TODO]} />
+          <HomeTab
+            topics={topics}
+            items={[DUMMY_NOTE_1, DUMMY_TODO_1, DUMMY_NOTE_2, DUMMY_TODO_2]}
+          />
         )}
         {selected === Menu.FAVOURITES && <FavouritesTab items={[]} />}
         {selected === Menu.RECENTLY_DELETED && (

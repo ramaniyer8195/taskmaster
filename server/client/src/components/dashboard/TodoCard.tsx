@@ -7,19 +7,31 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { FaEdit, FaTrash, FaTrashRestore } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import { formatDate } from "@/utils/dateUtils";
-import {
-  RiInboxArchiveFill,
-  RiInboxUnarchiveFill,
-  RiTodoFill,
-} from "react-icons/ri";
+import { RiTodoFill } from "react-icons/ri";
 import { FaHeartCircleMinus, FaHeartCirclePlus } from "react-icons/fa6";
 import { useState } from "react";
 import { getContent } from "@/utils/todoUtils";
+import DeleteItemModal from "../modals/DeleteItemModal";
+import RestoreItemModal from "../modals/RestoreItemModal";
+import DeletePermanentlyModal from "../modals/DeletePermanentlyModal";
+import UnarchiveItemModal from "../modals/UnarchiveItemModal";
+import ArchiveItemModal from "../modals/ArchiveItemModal";
 
-const TodoCard = ({ todo }: TodoCardProps) => {
+const TodoCard = ({
+  todo,
+  handleDelete,
+  handlePermanentDelete,
+  handleArchive,
+}: TodoCardProps) => {
   const [showFooter, setShowFooter] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openRestoreModal, setOpenRestoreModal] = useState(false);
+  const [openPermanentDeleteModal, setOpenPermanentDeleteModal] =
+    useState(false);
+  const [openArchiveModal, setOpenArchiveModal] = useState(false);
+  const [openUnarchiveModal, setOpenUnarchiveModal] = useState(false);
   const { isArchived, isDeleted, isFavourite } = todo;
 
   return (
@@ -49,12 +61,32 @@ const TodoCard = ({ todo }: TodoCardProps) => {
           }`}
         >
           {!isDeleted && <FaEdit className="cursor-pointer" />}
-          {!isDeleted && <FaTrash className="cursor-pointer" />}
+          {!isDeleted && (
+            <DeleteItemModal
+              open={openDeleteModal}
+              setOpen={setOpenDeleteModal}
+              id={todo._id}
+              type={todo.type}
+              handleDelete={handleDelete}
+            />
+          )}
           {!isDeleted ? (
             isArchived ? (
-              <RiInboxUnarchiveFill className="cursor-pointer" />
+              <UnarchiveItemModal
+                open={openUnarchiveModal}
+                setOpen={setOpenUnarchiveModal}
+                id={todo._id}
+                type={todo.type}
+                handleArchive={handleArchive}
+              />
             ) : (
-              <RiInboxArchiveFill className="cursor-pointer" />
+              <ArchiveItemModal
+                open={openArchiveModal}
+                setOpen={setOpenArchiveModal}
+                id={todo._id}
+                type={todo.type}
+                handleArchive={handleArchive}
+              />
             )
           ) : (
             <></>
@@ -68,8 +100,24 @@ const TodoCard = ({ todo }: TodoCardProps) => {
           ) : (
             <></>
           )}
-          {isDeleted && <FaTrashRestore className="cursor-pointer" />}
-          {isDeleted && <FaTrash className="cursor-pointer" />}
+          {isDeleted && (
+            <RestoreItemModal
+              open={openRestoreModal}
+              setOpen={setOpenRestoreModal}
+              id={todo._id}
+              type={todo.type}
+              handleDelete={handleDelete}
+            />
+          )}
+          {isDeleted && (
+            <DeletePermanentlyModal
+              open={openPermanentDeleteModal}
+              setOpen={setOpenPermanentDeleteModal}
+              id={todo._id}
+              type={todo.type}
+              handlePermanentDelete={handlePermanentDelete}
+            />
+          )}
         </div>
       </CardFooter>
     </Card>
