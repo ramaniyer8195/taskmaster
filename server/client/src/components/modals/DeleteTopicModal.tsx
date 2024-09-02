@@ -41,7 +41,7 @@ const DeleteTopicModal = ({ open, setOpen, title }: DeleteTopicModalProps) => {
             undone.
           </p>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleDeleteTopic}>
             Yes
           </Button>

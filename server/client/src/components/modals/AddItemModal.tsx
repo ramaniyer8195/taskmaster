@@ -103,7 +103,7 @@ const AddItemModal = ({ open, setOpen, topics }: AddItemModalProps) => {
             />
           </div>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleAddItem}>
             Add
           </Button>

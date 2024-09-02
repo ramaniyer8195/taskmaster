@@ -65,7 +65,7 @@ const EditTopicModal = ({
             />
           </div>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleEditTopic}>
             Save
           </Button>

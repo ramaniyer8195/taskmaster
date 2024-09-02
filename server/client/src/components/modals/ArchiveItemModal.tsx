@@ -45,7 +45,7 @@ const ArchiveItemModal = ({
           </p>
           <p>Are you sure you want to archive this {type}?</p>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleArchiveItem}>
             Yes
           </Button>

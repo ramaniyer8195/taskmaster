@@ -41,7 +41,7 @@ const UnarchiveItemModal = ({
         <div className="grid gap-4 py-4">
           <p>Are you sure you want to unarchive this {type}?</p>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleUnarchiveItem}>
             Yes
           </Button>

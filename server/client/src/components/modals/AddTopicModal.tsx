@@ -71,7 +71,7 @@ const AddTopicModal = ({ open, setOpen }: ModalProps) => {
             />
           </div>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleAddTopic}>
             Add
           </Button>

@@ -45,7 +45,7 @@ const FavouriteItemModal = ({
           </p>
           <p>Are you sure you want to favourite this {type}?</p>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleFavouriteItem}>
             Yes
           </Button>

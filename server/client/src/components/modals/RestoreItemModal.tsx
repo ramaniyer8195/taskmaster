@@ -41,7 +41,7 @@ const RestoreItemModal = ({
         <div className="grid gap-4 py-4">
           <p>Are you sure you want to restore this {type}?</p>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleRestoreItem}>
             Yes
           </Button>

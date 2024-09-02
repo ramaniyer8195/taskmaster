@@ -44,7 +44,7 @@ const DeletePermanentlyModal = ({
             action cannot be undone.
           </p>
         </div>
-        <DialogFooter>
+        <DialogFooter className="justify-end">
           <Button type="submit" onClick={handleDeletePermanently}>
             Yes
           </Button>
