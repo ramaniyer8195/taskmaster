@@ -33,8 +33,8 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
     console.log(id, isDeleted);
   };
 
-  const handleEdit = (id: string, content: string) => {
-    console.log(id, content);
+  const handleEdit = (id: string, content: string, title: string) => {
+    console.log(id, content, title);
   };
 
   const handleFavourite = (id: string, isFavourite: boolean) => {
@@ -102,6 +102,7 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
                     handleFavourite={handleFavourite}
                     handlePermanentDelete={handlePermanentDelete}
                     handleTopicUpdate={handleTopicUpdate}
+                    topics={topics}
                   />
                 );
               } else {
@@ -115,6 +116,7 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
                     handleFavourite={handleFavourite}
                     handlePermanentDelete={handlePermanentDelete}
                     handleTopicUpdate={handleTopicUpdate}
+                    topics={topics}
                   />
                 );
               }

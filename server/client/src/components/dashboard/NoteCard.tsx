@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Fragment } from "react/jsx-runtime";
-import { FaEdit, FaEye, FaStickyNote } from "react-icons/fa";
+import { FaStickyNote } from "react-icons/fa";
 import { formatDate } from "@/utils/dateUtils";
 import { useState } from "react";
 import DeleteItemModal from "../modals/DeleteItemModal";
@@ -18,13 +18,18 @@ import UnarchiveItemModal from "../modals/UnarchiveItemModal";
 import ArchiveItemModal from "../modals/ArchiveItemModal";
 import UnfavouriteItemModal from "../modals/UnfavouriteItemModal";
 import FavouriteItemModal from "../modals/FavouriteItemModal";
+import NoteViewModal from "../modals/NoteViewModal";
+import NoteEditModal from "../modals/NoteEditModal";
 
 const NoteCard = ({
+  topics,
   note,
   handleDelete,
   handlePermanentDelete,
   handleArchive,
   handleFavourite,
+  handleEdit,
+  handleTopicUpdate,
 }: NoteCardProps) => {
   const [showFooter, setShowFooter] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -35,6 +40,8 @@ const NoteCard = ({
   const [openUnarchiveModal, setOpenUnarchiveModal] = useState(false);
   const [openFavouriteModal, setOpenFavouriteModal] = useState(false);
   const [openUnfavouriteModal, setOpenUnfavouriteModal] = useState(false);
+  const [openNoteViewModal, setOpenNoteViewModal] = useState(false);
+  const [openNoteEditModal, setOpenNoteEditModal] = useState(false);
   const { isArchived, isDeleted, isFavourite } = note;
 
   return (
@@ -70,8 +77,26 @@ const NoteCard = ({
             showFooter ? "visible" : "invisible"
           }`}
         >
-          {!isDeleted && <FaEdit className="cursor-pointer" />}
-          {!isDeleted && <FaEye className="cursor-pointer" />}
+          {!isDeleted && (
+            <NoteEditModal
+              open={openNoteEditModal}
+              setOpen={setOpenNoteEditModal}
+              note={note}
+              handleEdit={handleEdit}
+              handleTopicUpdate={handleTopicUpdate}
+              topics={topics}
+            />
+          )}
+          {!isDeleted && (
+            <NoteViewModal
+              open={openNoteViewModal}
+              setOpen={setOpenNoteViewModal}
+              note={note}
+              handleDelete={handleDelete}
+              handleArchive={handleArchive}
+              handleFavourite={handleFavourite}
+            />
+          )}
           {!isDeleted && (
             <DeleteItemModal
               open={openDeleteModal}
