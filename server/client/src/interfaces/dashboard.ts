@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Note, Todo } from "./api";
+import { Note, Todo, Topic } from "./api";
 
 export enum Menu {
   HOME = "Home",
@@ -15,15 +15,10 @@ export interface MenuItem {
   id: number;
 }
 
-export interface TopicItem {
-  name: string;
-  colorClass: string;
-}
-
 export interface SidebarProps {
   selected: Menu;
   handleMenuChange: (e: MouseEvent<HTMLDivElement>) => void;
-  topics: TopicItem[];
+  topics: Topic[];
   handleSignOut: () => void;
 }
 
@@ -32,20 +27,21 @@ export interface TabProps {
 }
 
 export interface HomeTabProps extends TabProps {
-  topics: TopicItem[];
+  topics: Topic[];
 }
 
 export interface TopicItemProps {
-  topic: TopicItem;
+  topic: Topic;
 }
 
 interface ItemProps {
-  handleEdit: (id: string, content: string) => void;
+  handleEdit: (id: string, content: string, title: string) => void;
   handleDelete: (id: string, isDeleted: boolean) => void;
   handleArchive: (id: string, isArchived: boolean) => void;
   handleFavourite: (id: string, isFavourite: boolean) => void;
   handleTopicUpdate: (id: string, topicId: string) => void;
   handlePermanentDelete: (id: string) => void;
+  topics: Topic[];
 }
 
 export interface NoteCardProps extends ItemProps {

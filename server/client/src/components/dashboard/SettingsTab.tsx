@@ -16,7 +16,7 @@ import OtpVerifyForm from "../common/OtpVerifyForm";
 
 const SettingsTab = () => {
   const { setTheme } = useTheme();
-  const [isVerified, setIsVerified] = useState(true);
+  const [isVerified] = useState(true);
   const [isVerificationInProgress, setIsVerificationInProgress] =
     useState(false);
   const [currTheme, setCurrTheme] = useState("light");

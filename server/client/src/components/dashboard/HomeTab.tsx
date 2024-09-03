@@ -63,10 +63,10 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
           {topics.map((topic, id) => (
             <Button
               key={id}
-              variant={selected === topic.name ? "default" : "secondary"}
+              variant={selected === topic.title ? "default" : "secondary"}
               onClick={handleTopicChange}
             >
-              {topic.name}
+              {topic.title}
             </Button>
           ))}
         </div>

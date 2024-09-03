@@ -10,22 +10,19 @@ const TopicItem = ({ topic }: TopicItemProps) => {
   return (
     <div className="flex justify-between items-center">
       <div className="px-4 flex gap-2 items-center">
-        <div
-          className={`w-[15px] h-[15px] bg-${topic.colorClass} rounded-full`}
-        />
-        <div>{topic.name}</div>
+        <div className={`w-[15px] h-[15px] bg-${topic.color} rounded-full`} />
+        <div>{topic.title}</div>
       </div>
       <div className="flex gap-2 text-primary">
         <EditTopicModal
           open={openEditModal}
           setOpen={setOpenEditModal}
-          title={topic.name}
-          color={topic.colorClass}
+          topic={topic}
         />
         <DeleteTopicModal
           open={openDeleteModal}
           setOpen={setOpenDeleteModal}
-          title={topic.name}
+          title={topic.title}
         />
       </div>
     </div>

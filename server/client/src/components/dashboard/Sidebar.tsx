@@ -49,8 +49,8 @@ const Sidebar = ({
         <div className="flex flex-col gap-3 px-5">
           <h2 className="text-xl font-display font-bold">Topics</h2>
           <div className="flex flex-col gap-2">
-            {topics.map((topic, id) => (
-              <TopicItem topic={topic} key={id} />
+            {topics.map((topic) => (
+              <TopicItem topic={topic} key={topic._id} />
             ))}
           </div>
           <AddTopicModal open={openTopicModal} setOpen={setOpenTopicModal} />

@@ -1,5 +1,5 @@
 import { MouseEvent, useState } from "react";
-import { Menu, TopicItem } from "@/interfaces/dashboard";
+import { Menu } from "@/interfaces/dashboard";
 import Sidebar from "@/components/dashboard/Sidebar";
 import HomeTab from "@/components/dashboard/HomeTab";
 import FavouritesTab from "@/components/dashboard/FavouritesTab";
@@ -13,12 +13,13 @@ import {
   DUMMY_TODO_1,
   DUMMY_TODO_2,
 } from "@/constants/tempData";
+import { Topic } from "@/interfaces/api";
 
 const Dashboard = () => {
   const [selected, setSelected] = useState(Menu.HOME);
-  const [topics, setTopics] = useState<TopicItem[]>([
-    { name: "Personal", colorClass: TOPIC_COLORS.EMERALD_GREEN },
-    { name: "Business", colorClass: TOPIC_COLORS.CHARCOAL },
+  const [topics] = useState<Topic[]>([
+    { title: "Personal", color: TOPIC_COLORS.EMERALD_GREEN, _id: "1" },
+    { title: "Business", color: TOPIC_COLORS.CHARCOAL, _id: "2" },
   ]);
 
   const handleMenuChange = (e: MouseEvent<HTMLDivElement>) => {

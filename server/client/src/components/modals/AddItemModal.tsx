@@ -86,8 +86,8 @@ const AddItemModal = ({ open, setOpen, topics }: AddItemModalProps) => {
               <SelectContent>
                 <SelectItem value="Uncategorized">Uncategorized</SelectItem>
                 {topics.map((topic, id) => (
-                  <SelectItem key={id} value={topic.name}>
-                    {topic.name}
+                  <SelectItem key={id} value={topic.title}>
+                    {topic.title}
                   </SelectItem>
                 ))}
               </SelectContent>

@@ -1,4 +1,4 @@
-import { TopicItem } from "./dashboard";
+import { Note, Topic } from "./api";
 
 export interface ModalProps {
   open: boolean;
@@ -6,8 +6,13 @@ export interface ModalProps {
 }
 
 export interface EditTopicModalProps extends ModalProps {
-  title: string;
-  color: string;
+  topic: Topic;
+}
+
+export interface UpdateTopicModalProps extends ModalProps {
+  topics: Topic[];
+  itemId: string;
+  handleTopicChange: (id: string, topicId: string) => void;
 }
 
 export interface DeleteTopicModalProps extends ModalProps {
@@ -15,7 +20,7 @@ export interface DeleteTopicModalProps extends ModalProps {
 }
 
 export interface AddItemModalProps extends ModalProps {
-  topics: TopicItem[];
+  topics: Topic[];
 }
 
 export interface ColorPickerProps {
@@ -42,4 +47,18 @@ export interface ArchiveItemModalProps extends ItemModalProps {
 
 export interface FavouriteItemModalProps extends ItemModalProps {
   handleFavourite: (id: string, isFavourite: boolean) => void;
+}
+
+export interface NoteViewModalProps extends ModalProps {
+  note: Note;
+  handleDelete: (id: string, isDeleted: boolean) => void;
+  handleArchive: (id: string, isArchived: boolean) => void;
+  handleFavourite: (id: string, isFavourite: boolean) => void;
+}
+
+export interface NoteEditModalProps extends ModalProps {
+  note: Note;
+  topics: Topic[];
+  handleEdit: (id: string, content: string, title: string) => void;
+  handleTopicUpdate: (id: string, topicId: string) => void;
 }

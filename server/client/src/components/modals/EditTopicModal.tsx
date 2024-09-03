@@ -14,17 +14,13 @@ import { EditTopicModalProps } from "@/interfaces/modals";
 import ColorPicker from "./ColorPicker";
 import { useState } from "react";
 
-const EditTopicModal = ({
-  open,
-  setOpen,
-  title,
-  color,
-}: EditTopicModalProps) => {
+const EditTopicModal = ({ open, setOpen, topic }: EditTopicModalProps) => {
+  const { title, color, _id } = topic;
   const [topicTitle, setTopicTitle] = useState(title);
   const [selectedColor, setSelectedColor] = useState(color);
 
   const handleEditTopic = () => {
-    console.log(`Add Topic title: ${title} color: ${selectedColor}`);
+    console.log(`Add Topic title: ${title} color: ${selectedColor} id: ${_id}`);
     setTopicTitle(title);
     setSelectedColor(color);
     setOpen(false);
