@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import AddItemModal from "../modals/AddItemModal";
 import NoteCard from "./NoteCard";
 import TodoCard from "./TodoCard";
-import { Note, Todo } from "@/interfaces/api";
+import { Content, Note, Todo } from "@/interfaces/api";
 
 const HomeTab = ({ topics, items }: HomeTabProps) => {
   const [selected, setSelected] = useState("All");
@@ -33,7 +33,11 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
     console.log(id, isDeleted);
   };
 
-  const handleEdit = (id: string, content: string, title: string) => {
+  const handleNoteEdit = (id: string, content: string, title: string) => {
+    console.log(id, content, title);
+  };
+
+  const handleTodoEdit = (id: string, content: Content[], title: string) => {
     console.log(id, content, title);
   };
 
@@ -98,7 +102,7 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
                     note={item}
                     handleArchive={handleArchive}
                     handleDelete={handleDelete}
-                    handleEdit={handleEdit}
+                    handleEdit={handleNoteEdit}
                     handleFavourite={handleFavourite}
                     handlePermanentDelete={handlePermanentDelete}
                     handleTopicUpdate={handleTopicUpdate}
@@ -112,7 +116,7 @@ const HomeTab = ({ topics, items }: HomeTabProps) => {
                     todo={item}
                     handleArchive={handleArchive}
                     handleDelete={handleDelete}
-                    handleEdit={handleEdit}
+                    handleEdit={handleTodoEdit}
                     handleFavourite={handleFavourite}
                     handlePermanentDelete={handlePermanentDelete}
                     handleTopicUpdate={handleTopicUpdate}
