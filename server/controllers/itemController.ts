@@ -51,6 +51,7 @@ export const getItems: RequestHandler<
       const topicId = note.topicId;
       const topic = await Topic.findById(topicId);
       const topicTitle = topic?.title || "";
+      const topicColor = topic?.color || "";
 
       updatedNotes.push({
         _id: note._id,
@@ -62,6 +63,7 @@ export const getItems: RequestHandler<
         isArchived: note.isArchived,
         isFavourite: note.isFavourite,
         topic: topicTitle,
+        color: topicColor,
         type: "note",
       });
     }
@@ -75,6 +77,7 @@ export const getItems: RequestHandler<
       const topicId = todo.topicId;
       const topic = await Topic.findById(topicId);
       const topicTitle = topic?.title || "";
+      const topicColor = topic?.color || "";
 
       updatedTodos.push({
         _id: todo._id,
@@ -86,6 +89,7 @@ export const getItems: RequestHandler<
         isArchived: todo.isArchived,
         isFavourite: todo.isFavourite,
         topic: topicTitle,
+        color: topicColor,
         type: "todo",
       });
     }
@@ -274,7 +278,8 @@ const deleteNote = async (
     const topicId = note.topicId;
     const topic = await Topic.findById(topicId);
     const topicTitle = topic?.title || "";
-    const updatedNote = {
+    const topicColor = topic?.color || "";
+    const updatedNote: NoteSchema = {
       _id: note._id,
       title: note.title,
       content: note.content,
@@ -284,6 +289,7 @@ const deleteNote = async (
       isArchived: note.isArchived,
       isFavourite: note.isFavourite,
       topic: topicTitle,
+      color: topicColor,
       type: "note",
     };
 
@@ -320,7 +326,8 @@ const deleteTodo = async (
     const topicId = todo.topicId;
     const topic = await Topic.findById(topicId);
     const topicTitle = topic?.title || "";
-    const updatedNote = {
+    const topicColor = topic?.color || "";
+    const updatedNote: TodoSchema = {
       _id: todo._id,
       title: todo.title,
       content: todo.content,
@@ -330,6 +337,7 @@ const deleteTodo = async (
       isArchived: todo.isArchived,
       isFavourite: todo.isFavourite,
       topic: topicTitle,
+      color: topicColor,
       type: "todo",
     };
 
