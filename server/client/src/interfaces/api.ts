@@ -1,29 +1,23 @@
-import { Types } from "mongoose";
-
-// User Schema Types
-export interface IUser {
+export interface User {
+  _id: string;
   name: string;
   email: string;
-  password: string;
   avatar: string;
   loginMethod: "email" | "google" | "facebook" | "twitter" | "linkedin";
   isVerified: boolean;
   isConnected: boolean;
   createdAt: Date;
   updatedAt: Date;
-  otp: string;
 }
 
-// Topic Schema Types
-export interface ITopic {
+export interface Topic {
+  _id: string;
   title: string;
   color: string;
-  userId: Types.ObjectId;
 }
 
-// Note Schema Type
-export interface INote {
-  userId: Types.ObjectId;
+export interface Note {
+  _id: string;
   title: string;
   content: string;
   createdAt: Date;
@@ -31,24 +25,25 @@ export interface INote {
   isDeleted: boolean;
   isArchived: boolean;
   isFavourite: boolean;
-  topicId: Types.ObjectId;
+  topic: string;
+  color: string;
+  type: string;
 }
 
-// Todo Schema Type
-interface BaseContent {
+export interface BaseContent {
   value: string;
   isCompleted: boolean;
   contentId: string;
 }
 
-interface HeadingContent extends BaseContent {
+export interface HeadingContent extends BaseContent {
   subList: BaseContent[];
 }
 
 export type Content = HeadingContent | BaseContent;
 
-export interface ITodo {
-  userId: Types.ObjectId;
+export interface Todo {
+  _id: string;
   title: string;
   content: Content[];
   createdAt: Date;
@@ -56,11 +51,7 @@ export interface ITodo {
   isDeleted: boolean;
   isArchived: boolean;
   isFavourite: boolean;
-  topicId: Types.ObjectId;
-}
-
-export interface ValidationErrors {
-  code?: number;
-  message: string;
-  errors: { [key: string]: { properties: { path: string; message: string } } };
+  topic: string;
+  color: string;
+  type: string;
 }

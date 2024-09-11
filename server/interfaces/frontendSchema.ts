@@ -29,6 +29,7 @@ export interface Note {
   isArchived: boolean;
   isFavourite: boolean;
   topic: string;
+  color: string;
   type: string;
 }
 
@@ -42,5 +43,6 @@ export interface Todo {
   isArchived: boolean;
   isFavourite: boolean;
   topic: string;
+  color: string;
   type: string;
 }

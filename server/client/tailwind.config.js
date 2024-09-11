@@ -1,11 +1,32 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = [
+  "electricBlue",
+  "emeraldGreen",
+  "darkTeal",
+  "softGold",
+  "royalPurple",
+  "crimsonRed",
+  "turquoise",
+  "slateGrey",
+  "deepSeaBlue",
+  "limeGreen",
+  "darkPlum",
+  "charcoal",
+];
+const utilities = ["bg", "border"];
+
+const safelist = colors.flatMap((color) =>
+  utilities.map((utility) => `${utility}-${color}`)
+);
+
 module.exports = {
   darkMode: ["class"],
-  content: ["./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{ts,tsx}", "index.html"],
   prefix: "",
   theme: {
     container: {
-      center: true,
+      center: "true",
       padding: "2rem",
       screens: {
         "2xl": "1400px",
@@ -46,6 +67,19 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Topic Colors
+        electricBlue: "var(--electric-blue)",
+        emeraldGreen: "var(--emerald-green)",
+        darkTeal: "var(--dark-teal)",
+        softGold: "var(--soft-gold)",
+        royalPurple: "var(--royal-purple)",
+        crimsonRed: "var(--crimson-red)",
+        turquoise: "var(--turquoise)",
+        slateGrey: "var(--slate-grey)",
+        deepSeaBlue: "var(--deep-sea-blue)",
+        limeGreen: "var(--lime-green)",
+        darkPlum: "var(--dark-plum)",
+        charcoal: "var(--charcoal)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -54,15 +88,41 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
         },
       },
       animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
@@ -71,5 +131,6 @@ module.exports = {
       display: ["Advent Pro", "sans-serif"],
     },
   },
+  safelist,
   plugins: [require("tailwindcss-animate")],
 };
