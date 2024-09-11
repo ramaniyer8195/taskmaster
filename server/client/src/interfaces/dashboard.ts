@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Note, Todo, Topic } from "./api";
+import { Content, Note, Todo, Topic } from "./api";
 
 export enum Menu {
   HOME = "Home",
@@ -35,7 +35,6 @@ export interface TopicItemProps {
 }
 
 interface ItemProps {
-  handleEdit: (id: string, content: string, title: string) => void;
   handleDelete: (id: string, isDeleted: boolean) => void;
   handleArchive: (id: string, isArchived: boolean) => void;
   handleFavourite: (id: string, isFavourite: boolean) => void;
@@ -45,9 +44,11 @@ interface ItemProps {
 }
 
 export interface NoteCardProps extends ItemProps {
+  handleEdit: (id: string, content: string, title: string) => void;
   note: Note;
 }
 
 export interface TodoCardProps extends ItemProps {
+  handleEdit: (id: string, content: Content[], title: string) => void;
   todo: Todo;
 }

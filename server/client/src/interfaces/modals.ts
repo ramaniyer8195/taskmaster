@@ -1,4 +1,4 @@
-import { Note, Topic } from "./api";
+import { Content, Note, Todo, Topic } from "./api";
 
 export interface ModalProps {
   open: boolean;
@@ -61,4 +61,72 @@ export interface NoteEditModalProps extends ModalProps {
   topics: Topic[];
   handleEdit: (id: string, content: string, title: string) => void;
   handleTopicUpdate: (id: string, topicId: string) => void;
+}
+
+export interface TodoEditModalProps extends ModalProps {
+  todo: Todo;
+  topics: Topic[];
+  handleEdit: (id: string, content: Content[], title: string) => void;
+  handleTopicUpdate: (id: string, topicId: string) => void;
+  handleDelete: (id: string, isDeleted: boolean) => void;
+  handleArchive: (id: string, isArchived: boolean) => void;
+  handleFavourite: (id: string, isFavourite: boolean) => void;
+}
+
+export interface BaseTodoItemProps {
+  item: Content;
+  removeItem: (
+    isCompleted: boolean,
+    isBaseItem: boolean,
+    id: string,
+    headingId?: string
+  ) => void;
+  handleCheck: (
+    isChecked: boolean,
+    isBaseItem: boolean,
+    id: string,
+    headingId?: string
+  ) => void;
+  handleTodoEdit: (
+    value: string,
+    isCompleted: boolean,
+    isBaseItem: boolean,
+    id: string,
+    headingId?: string
+  ) => void;
+  isPartiallyCompleted?: boolean;
+}
+
+export interface SubTodoItemProps {
+  item: Content;
+  headingId: string;
+  removeItem: (
+    isCompleted: boolean,
+    isBaseItem: boolean,
+    id: string,
+    headingId?: string
+  ) => void;
+  handleCheck: (
+    isChecked: boolean,
+    isBaseItem: boolean,
+    id: string,
+    headingId?: string
+  ) => void;
+  handleTodoEdit: (
+    value: string,
+    isCompleted: boolean,
+    isBaseItem: boolean,
+    id: string,
+    headingId?: string
+  ) => void;
+}
+
+export interface AddNewItemButtonProps {
+  isBaseItem: boolean;
+  handleAddNewItem: (isBaseItem: boolean, headingId?: string) => void;
+  headingId?: string;
+}
+
+export interface AddNewGroupButtonProps {
+  handleAddNewGroup: () => void;
 }

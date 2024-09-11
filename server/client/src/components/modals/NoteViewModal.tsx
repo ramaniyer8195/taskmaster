@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { NoteViewModalProps } from "@/interfaces/modals";
-import { FaEdit, FaEye } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import DeleteItemModal from "./DeleteItemModal";
 import { useState } from "react";
 import UnarchiveItemModal from "./UnarchiveItemModal";
@@ -57,7 +57,6 @@ const NoteViewModal = ({
         </div>
         <DialogFooter className="justify-between ">
           <div className="text-primary flex gap-4 mt-3 text-xl">
-            <FaEdit className="cursor-pointer" />
             <DeleteItemModal
               open={openDeleteModal}
               setOpen={setOpenDeleteModal}

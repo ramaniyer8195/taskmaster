@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { FaEdit } from "react-icons/fa";
 import { formatDate } from "@/utils/dateUtils";
 import { RiTodoFill } from "react-icons/ri";
 import { useState } from "react";
@@ -19,13 +18,17 @@ import UnarchiveItemModal from "../modals/UnarchiveItemModal";
 import ArchiveItemModal from "../modals/ArchiveItemModal";
 import UnfavouriteItemModal from "../modals/UnfavouriteItemModal";
 import FavouriteItemModal from "../modals/FavouriteItemModal";
+import TodoEditModal from "../modals/TodoEditModal";
 
 const TodoCard = ({
+  topics,
   todo,
   handleDelete,
   handlePermanentDelete,
   handleArchive,
   handleFavourite,
+  handleEdit,
+  handleTopicUpdate,
 }: TodoCardProps) => {
   const [showFooter, setShowFooter] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -36,6 +39,7 @@ const TodoCard = ({
   const [openUnarchiveModal, setOpenUnarchiveModal] = useState(false);
   const [openFavouriteModal, setOpenFavouriteModal] = useState(false);
   const [openUnfavouriteModal, setOpenUnfavouriteModal] = useState(false);
+  const [openNoteEditModal, setOpenNoteEditModal] = useState(false);
   const { isArchived, isDeleted, isFavourite } = todo;
 
   return (
@@ -64,7 +68,19 @@ const TodoCard = ({
             showFooter ? "visible" : "invisible"
           }`}
         >
-          {!isDeleted && <FaEdit className="cursor-pointer" />}
+          {!isDeleted && (
+            <TodoEditModal
+              open={openNoteEditModal}
+              setOpen={setOpenNoteEditModal}
+              todo={todo}
+              topics={topics}
+              handleEdit={handleEdit}
+              handleTopicUpdate={handleTopicUpdate}
+              handleDelete={handleDelete}
+              handleArchive={handleArchive}
+              handleFavourite={handleFavourite}
+            />
+          )}
           {!isDeleted && (
             <DeleteItemModal
               open={openDeleteModal}

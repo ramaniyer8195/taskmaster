@@ -33,7 +33,7 @@ export interface Note {
 export interface BaseContent {
   value: string;
   isCompleted: boolean;
-  id: string;
+  contentId: string;
 }
 
 export interface HeadingContent extends BaseContent {

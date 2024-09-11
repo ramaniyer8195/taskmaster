@@ -38,13 +38,11 @@ export interface INote {
 interface BaseContent {
   value: string;
   isCompleted: boolean;
+  contentId: string;
 }
 
 interface HeadingContent extends BaseContent {
-  subList: {
-    value: string;
-    isCompleted: boolean;
-  }[];
+  subList: BaseContent[];
 }
 
 export type Content = HeadingContent | BaseContent;

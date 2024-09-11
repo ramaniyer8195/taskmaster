@@ -1,7 +1,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { BaseContent, Content, HeadingContent } from "@/interfaces/api";
 
-const isHeading = (content: Content): content is HeadingContent => {
+export const isHeading = (content: Content): content is HeadingContent => {
   if ("subList" in content) return true;
   return false;
 };
@@ -47,9 +47,9 @@ const getHeadingContent = (content: HeadingContent, isComplete: boolean) => {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex gap-2 items-center">
-        <Checkbox id={content.id} checked={isComplete} />
+        <Checkbox id={content.contentId} checked={isComplete} />
         <label
-          htmlFor={content.id}
+          htmlFor={content.contentId}
           className={`text-lg ${
             content.isCompleted
               ? "line-through text-gray-400"
@@ -65,9 +65,9 @@ const getHeadingContent = (content: HeadingContent, isComplete: boolean) => {
         {content.subList.map((item, id) => {
           return (
             <div key={id} className="flex gap-2 items-center">
-              <Checkbox id={item.id} checked={item.isCompleted} />
+              <Checkbox id={item.contentId} checked={item.isCompleted} />
               <label
-                htmlFor={item.id}
+                htmlFor={item.contentId}
                 className={`${
                   item.isCompleted ? "line-through text-gray-400" : ""
                 }`}
@@ -85,9 +85,9 @@ const getHeadingContent = (content: HeadingContent, isComplete: boolean) => {
 const getBaseContent = (content: BaseContent) => {
   return (
     <div className="flex gap-2 items-center">
-      <Checkbox id={content.id} checked={content.isCompleted} />
+      <Checkbox id={content.contentId} checked={content.isCompleted} />
       <label
-        htmlFor={content.id}
+        htmlFor={content.contentId}
         className={`${content.isCompleted ? "line-through text-gray-400" : ""}`}
       >
         {content.value}
@@ -124,4 +124,43 @@ export const getContent = (content: Content[]) => {
       )}
     </div>
   );
+};
+
+export const generateNewId = () => {
+  return crypto.randomUUID();
+};
+
+export const buildTodoContent = (todos: {
+  completedTodos: Content[];
+  incompletedTodos: Content[];
+}) => {
+  const { completedTodos, incompletedTodos } = todos;
+  let todoContent = [...incompletedTodos];
+
+  completedTodos.forEach((item) => {
+    if (isHeading(item)) {
+      const existingItem = todoContent.find(
+        (content) => content.contentId === item.contentId
+      );
+
+      if (existingItem && isHeading(existingItem)) {
+        todoContent = todoContent.map((content) => {
+          if (content.contentId === item.contentId && isHeading(content)) {
+            return {
+              ...content,
+              subList: [...content.subList, ...item.subList],
+            };
+          } else {
+            return content;
+          }
+        });
+      } else {
+        todoContent.push(item);
+      }
+    } else {
+      todoContent.push(item);
+    }
+  });
+
+  return todoContent;
 };
