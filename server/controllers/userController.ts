@@ -73,7 +73,7 @@ export const signup: RequestHandler<{}, SignupRes, SignupReq> = async (
           confirmPassword: {
             properties: {
               message: USER_ERRORS.PASSWORDS_DONT_MATCH,
-              path: "password",
+              path: "confirmPassword",
             },
           },
         },
