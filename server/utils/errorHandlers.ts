@@ -22,6 +22,7 @@ export const handleSignupErrors = (err: ValidationErrors): ControllerErrors => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
     loginMethod: "",
   };
 

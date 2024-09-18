@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { Menu } from "@/interfaces/dashboard";
 import Sidebar from "@/components/dashboard/Sidebar";
 import HomeTab from "@/components/dashboard/HomeTab";
@@ -14,13 +14,31 @@ import {
   DUMMY_TODO_2,
 } from "@/constants/tempData";
 import { Topic } from "@/interfaces/api";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState(Menu.HOME);
   const [topics] = useState<Topic[]>([
     { title: "Personal", color: TOPIC_COLORS.EMERALD_GREEN, _id: "1" },
     { title: "Business", color: TOPIC_COLORS.CHARCOAL, _id: "2" },
   ]);
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      try {
+        const res = await axios.get("/api/user/getUser");
+        if (res.data.data && !res.data.data.isVerified) {
+          navigate("/otpVerify");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getCurrentUser();
+  }, []);
 
   const handleMenuChange = (e: MouseEvent<HTMLDivElement>) => {
     setSelected(e.currentTarget.innerText as Menu);

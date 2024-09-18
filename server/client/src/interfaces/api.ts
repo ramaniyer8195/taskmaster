@@ -55,3 +55,23 @@ export interface Todo {
   color: string;
   type: string;
 }
+
+export interface ApiError<T> {
+  response: {
+    data: {
+      error: T;
+    };
+  };
+}
+
+export interface SignupErrors {
+  name?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  loginMethod?: string;
+}
+
+export interface OtpErrors {
+  otp?: string;
+}

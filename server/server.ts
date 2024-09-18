@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/userRoutes";
 import topicRouter from "./routes/topicRoutes";
@@ -11,6 +12,7 @@ import { requireAuth } from "./middlewares/auth";
 const port = 5000 || process.env.PORT;
 const app = express();
 
+app.use(cors({ origin: "*", credentials: true, optionsSuccessStatus: 200 }));
 app.use(express.json());
 app.use(cookieParser());
 
