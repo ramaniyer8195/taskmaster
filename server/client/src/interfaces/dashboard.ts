@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Content, Note, Todo, Topic } from "./api";
+import { Content, Note, Todo, Topic, User } from "./api";
 
 export enum Menu {
   HOME = "Home",
@@ -16,6 +16,7 @@ export interface MenuItem {
 }
 
 export interface SidebarProps {
+  user: User | null;
   selected: Menu;
   handleMenuChange: (e: MouseEvent<HTMLDivElement>) => void;
   topics: Topic[];

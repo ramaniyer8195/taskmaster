@@ -80,3 +80,14 @@ export interface SignInErrors {
   email?: string;
   password?: string;
 }
+
+export interface AccountUpdateErrors {
+  name?: string;
+  update?: string;
+}
+
+export interface PasswordErrors {
+  oldPassword?: string;
+  newPassword?: string;
+  confirmPassword?: string;
+}
