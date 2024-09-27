@@ -3,7 +3,11 @@ import { useState } from "react";
 import EditTopicModal from "../modals/EditTopicModal";
 import DeleteTopicModal from "../modals/DeleteTopicModal";
 
-const TopicItem = ({ topic }: TopicItemProps) => {
+const TopicItem = ({
+  topic,
+  handleEditTopic,
+  handleDeleteTopic,
+}: TopicItemProps) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
@@ -18,11 +22,14 @@ const TopicItem = ({ topic }: TopicItemProps) => {
           open={openEditModal}
           setOpen={setOpenEditModal}
           topic={topic}
+          handleEditTopic={handleEditTopic}
         />
         <DeleteTopicModal
           open={openDeleteModal}
           setOpen={setOpenDeleteModal}
           title={topic.title}
+          topicId={topic._id}
+          handleDeleteTopic={handleDeleteTopic}
         />
       </div>
     </div>

@@ -14,15 +14,24 @@ import { EditTopicModalProps } from "@/interfaces/modals";
 import ColorPicker from "./ColorPicker";
 import { useState } from "react";
 
-const EditTopicModal = ({ open, setOpen, topic }: EditTopicModalProps) => {
+const EditTopicModal = ({
+  open,
+  setOpen,
+  topic,
+  handleEditTopic: handleEdit,
+}: EditTopicModalProps) => {
   const { title, color, _id } = topic;
   const [topicTitle, setTopicTitle] = useState(title);
   const [selectedColor, setSelectedColor] = useState(color);
+  const [error, setError] = useState("");
 
   const handleEditTopic = () => {
-    console.log(`Add Topic title: ${title} color: ${selectedColor} id: ${_id}`);
-    setTopicTitle(title);
-    setSelectedColor(color);
+    if (!topicTitle) {
+      setError("Please enter a title");
+      return;
+    }
+
+    handleEdit(topicTitle, selectedColor, _id);
     setOpen(false);
   };
 
@@ -30,6 +39,11 @@ const EditTopicModal = ({ open, setOpen, topic }: EditTopicModalProps) => {
     setTopicTitle(title);
     setSelectedColor(color);
     setOpen(false);
+  };
+
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError("");
+    setTopicTitle(e.target.value);
   };
 
   return (
@@ -40,7 +54,7 @@ const EditTopicModal = ({ open, setOpen, topic }: EditTopicModalProps) => {
       <DialogContent className="sm:max-w-[425px] border-primary border-t-8">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-bold">
-            Create new topic
+            Edit topic
           </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -50,8 +64,11 @@ const EditTopicModal = ({ open, setOpen, topic }: EditTopicModalProps) => {
               id="title"
               className="col-span-3"
               value={topicTitle}
-              onChange={(e) => setTopicTitle(e.target.value)}
+              onChange={handleChangeTitle}
             />
+            {error !== "" && (
+              <p className="text-red-500 text-xs font-bold">{error}</p>
+            )}
           </div>
           <div>
             <Label htmlFor="color">Select topic color</Label>

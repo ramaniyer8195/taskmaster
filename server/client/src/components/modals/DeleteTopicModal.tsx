@@ -10,9 +10,15 @@ import {
 } from "../ui/dialog";
 import { DeleteTopicModalProps } from "@/interfaces/modals";
 
-const DeleteTopicModal = ({ open, setOpen, title }: DeleteTopicModalProps) => {
+const DeleteTopicModal = ({
+  open,
+  setOpen,
+  title,
+  topicId,
+  handleDeleteTopic: handleDelete,
+}: DeleteTopicModalProps) => {
   const handleDeleteTopic = () => {
-    console.log(`Delete Topic title: ${title}`);
+    handleDelete(topicId);
     setOpen(false);
   };
 

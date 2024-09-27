@@ -11,8 +11,11 @@ const Sidebar = ({
   handleMenuChange,
   topics,
   handleSignOut,
+  handleEditTopic,
+  handleAddTopic,
+  handleDeleteTopic,
 }: SidebarProps) => {
-  const [openTopicModal, setOpenTopicModal] = useState(false);
+  const [addTopicModal, setAddTopicModal] = useState(false);
 
   return (
     <div className="flex flex-col justify-between h-full">
@@ -50,10 +53,19 @@ const Sidebar = ({
           <h2 className="text-xl font-display font-bold">Topics</h2>
           <div className="flex flex-col gap-2">
             {topics.map((topic) => (
-              <TopicItem topic={topic} key={topic._id} />
+              <TopicItem
+                topic={topic}
+                key={topic._id}
+                handleEditTopic={handleEditTopic}
+                handleDeleteTopic={handleDeleteTopic}
+              />
             ))}
           </div>
-          <AddTopicModal open={openTopicModal} setOpen={setOpenTopicModal} />
+          <AddTopicModal
+            open={addTopicModal}
+            setOpen={setAddTopicModal}
+            handleAddTopic={handleAddTopic}
+          />
         </div>
       </div>
       <div
