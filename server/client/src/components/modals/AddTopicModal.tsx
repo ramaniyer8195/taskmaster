@@ -10,21 +10,29 @@ import {
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { ModalProps } from "@/interfaces/modals";
+import { AddTopicModalProps } from "@/interfaces/modals";
 import ColorPicker from "./ColorPicker";
 import { useState } from "react";
 import { TOPIC_COLORS } from "@/constants/constants";
 
-const AddTopicModal = ({ open, setOpen }: ModalProps) => {
+const AddTopicModal = ({
+  open,
+  setOpen,
+  handleAddTopic: handleAdd,
+}: AddTopicModalProps) => {
   const [selectedColor, setSelectedColor] = useState(
     TOPIC_COLORS.ELECTRIC_BLUE
   );
   const [title, setTitle] = useState("");
+  const [error, setError] = useState("");
 
   const handleAddTopic = () => {
-    console.log(`Add Topic title: ${title} color: ${selectedColor}`);
-    setTitle("");
-    setSelectedColor(TOPIC_COLORS.ELECTRIC_BLUE);
+    if (!title) {
+      setError("Please enter a title");
+      return;
+    }
+
+    handleAdd(title, selectedColor);
     setOpen(false);
   };
 
@@ -32,6 +40,11 @@ const AddTopicModal = ({ open, setOpen }: ModalProps) => {
     setTitle("");
     setSelectedColor(TOPIC_COLORS.ELECTRIC_BLUE);
     setOpen(false);
+  };
+
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError("");
+    setTitle(e.target.value);
   };
 
   return (
@@ -60,8 +73,11 @@ const AddTopicModal = ({ open, setOpen }: ModalProps) => {
               id="title"
               className="col-span-3"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={handleChangeTitle}
             />
+            {error !== "" && (
+              <p className="text-red-500 text-xs font-bold">{error}</p>
+            )}
           </div>
           <div>
             <Label htmlFor="color">Select topic color</Label>

@@ -20,6 +20,13 @@ export interface SidebarProps {
   handleMenuChange: (e: MouseEvent<HTMLDivElement>) => void;
   topics: Topic[];
   handleSignOut: () => void;
+  handleEditTopic: (
+    topicTitle: string,
+    topicColor: string,
+    topicId: string
+  ) => void;
+  handleAddTopic: (topicTitle: string, topicColor: string) => void;
+  handleDeleteTopic: (topicId: string) => void;
 }
 
 export interface TabProps {
@@ -32,6 +39,12 @@ export interface HomeTabProps extends TabProps {
 
 export interface TopicItemProps {
   topic: Topic;
+  handleEditTopic: (
+    topicTitle: string,
+    topicColor: string,
+    topicId: string
+  ) => void;
+  handleDeleteTopic: (topicId: string) => void;
 }
 
 interface ItemProps {

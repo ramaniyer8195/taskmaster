@@ -5,8 +5,17 @@ export interface ModalProps {
   setOpen: (openState: boolean) => void;
 }
 
+export interface AddTopicModalProps extends ModalProps {
+  handleAddTopic: (topicTitle: string, topicColor: string) => void;
+}
+
 export interface EditTopicModalProps extends ModalProps {
   topic: Topic;
+  handleEditTopic: (
+    topicTitle: string,
+    topicColor: string,
+    topicId: string
+  ) => void;
 }
 
 export interface UpdateTopicModalProps extends ModalProps {
@@ -17,6 +26,8 @@ export interface UpdateTopicModalProps extends ModalProps {
 
 export interface DeleteTopicModalProps extends ModalProps {
   title: string;
+  topicId: string;
+  handleDeleteTopic: (topicId: string) => void;
 }
 
 export interface AddItemModalProps extends ModalProps {
