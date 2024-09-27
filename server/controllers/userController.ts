@@ -239,6 +239,20 @@ export const changeDetails: RequestHandler<
   try {
     const user = await User.findOne({ _id });
 
+    if (name === "") {
+      throw {
+        message: "User validation failed",
+        errors: {
+          name: {
+            properties: {
+              message: USER_ERRORS.EMPTY_NAME,
+              path: "name",
+            },
+          },
+        },
+      } as ValidationErrors;
+    }
+
     if (!name && !avatar) {
       throw {
         message: "User validation failed",
