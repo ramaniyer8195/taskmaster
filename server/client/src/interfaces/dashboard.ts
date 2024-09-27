@@ -31,11 +31,14 @@ export interface SidebarProps {
 }
 
 export interface TabProps {
-  items: (Note | Todo)[];
-}
-
-export interface HomeTabProps extends TabProps {
   topics: Topic[];
+  handleDelete: (id: string, isDeleted: boolean) => void;
+  handleArchive: (id: string, isArchived: boolean) => void;
+  handleFavourite: (id: string, isFavourite: boolean) => void;
+  handleTopicUpdate: (id: string, topicId: string) => void;
+  handlePermanentDelete: (id: string) => void;
+  handleNoteEdit: (id: string, content: string, title: string) => void;
+  handleTodoEdit: (id: string, content: Content[], title: string) => void;
 }
 
 export interface TopicItemProps {

@@ -6,13 +6,7 @@ import FavouritesTab from "@/components/dashboard/FavouritesTab";
 import RecentlyDeletedTab from "@/components/dashboard/RecentlyDeletedTab";
 import ArchiveTab from "@/components/dashboard/ArchiveTab";
 import SettingsTab from "@/components/dashboard/SettingsTab";
-import {
-  DUMMY_NOTE_1,
-  DUMMY_NOTE_2,
-  DUMMY_TODO_1,
-  DUMMY_TODO_2,
-} from "@/constants/tempData";
-import { Topic, User } from "@/interfaces/api";
+import { Content, Topic, User } from "@/interfaces/api";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
@@ -121,6 +115,34 @@ const Dashboard = () => {
     }
   };
 
+  const handleArchive = (id: string, isArchived: boolean) => {
+    console.log(id, isArchived);
+  };
+
+  const handleDelete = (id: string, isDeleted: boolean) => {
+    console.log(id, isDeleted);
+  };
+
+  const handleNoteEdit = (id: string, content: string, title: string) => {
+    console.log(id, content, title);
+  };
+
+  const handleTodoEdit = (id: string, content: Content[], title: string) => {
+    console.log(id, content, title);
+  };
+
+  const handleFavourite = (id: string, isFavourite: boolean) => {
+    console.log(id, isFavourite);
+  };
+
+  const handlePermanentDelete = (id: string) => {
+    console.log(id);
+  };
+
+  const handleTopicUpdate = (id: string, topicId: string) => {
+    console.log(id, topicId);
+  };
+
   return (
     <div className="w-[97vw] h-[100vh] flex justify-between">
       <div className="min-w-[15%] pt-5 bg-muted relative">
@@ -139,14 +161,51 @@ const Dashboard = () => {
         {selected === Menu.HOME && (
           <HomeTab
             topics={topics}
-            items={[DUMMY_NOTE_1, DUMMY_TODO_1, DUMMY_NOTE_2, DUMMY_TODO_2]}
+            handleArchive={handleArchive}
+            handleDelete={handleDelete}
+            handleNoteEdit={handleNoteEdit}
+            handleTodoEdit={handleTodoEdit}
+            handleFavourite={handleFavourite}
+            handlePermanentDelete={handlePermanentDelete}
+            handleTopicUpdate={handleTopicUpdate}
           />
         )}
-        {selected === Menu.FAVOURITES && <FavouritesTab items={[]} />}
-        {selected === Menu.RECENTLY_DELETED && (
-          <RecentlyDeletedTab items={[]} />
+        {selected === Menu.FAVOURITES && (
+          <FavouritesTab
+            topics={topics}
+            handleArchive={handleArchive}
+            handleDelete={handleDelete}
+            handleNoteEdit={handleNoteEdit}
+            handleTodoEdit={handleTodoEdit}
+            handleFavourite={handleFavourite}
+            handlePermanentDelete={handlePermanentDelete}
+            handleTopicUpdate={handleTopicUpdate}
+          />
         )}
-        {selected === Menu.ARCHIVE && <ArchiveTab items={[]} />}
+        {selected === Menu.RECENTLY_DELETED && (
+          <RecentlyDeletedTab
+            topics={topics}
+            handleArchive={handleArchive}
+            handleDelete={handleDelete}
+            handleNoteEdit={handleNoteEdit}
+            handleTodoEdit={handleTodoEdit}
+            handleFavourite={handleFavourite}
+            handlePermanentDelete={handlePermanentDelete}
+            handleTopicUpdate={handleTopicUpdate}
+          />
+        )}
+        {selected === Menu.ARCHIVE && (
+          <ArchiveTab
+            topics={topics}
+            handleArchive={handleArchive}
+            handleDelete={handleDelete}
+            handleNoteEdit={handleNoteEdit}
+            handleTodoEdit={handleTodoEdit}
+            handleFavourite={handleFavourite}
+            handlePermanentDelete={handlePermanentDelete}
+            handleTopicUpdate={handleTopicUpdate}
+          />
+        )}
         {selected === Menu.SETTINGS && (
           <SettingsTab user={currUser} getCurrentUser={getCurrentUser} />
         )}
