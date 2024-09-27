@@ -16,8 +16,10 @@ import {
 import { Topic } from "@/interfaces/api";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
 
 const Dashboard = () => {
+  const { setUser } = useAuth();
   const navigate = useNavigate();
   const [selected, setSelected] = useState(Menu.HOME);
   const [topics] = useState<Topic[]>([
@@ -44,8 +46,15 @@ const Dashboard = () => {
     setSelected(e.currentTarget.innerText as Menu);
   };
 
-  const handleSignOut = () => {
-    console.log("Sign out clicked!");
+  const handleSignOut = async () => {
+    try {
+      await axios.get("/api/user/signout");
+      setUser("");
+
+      navigate("/signIn", { replace: true });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

@@ -75,3 +75,8 @@ export interface SignupErrors {
 export interface OtpErrors {
   otp?: string;
 }
+
+export interface SignInErrors {
+  email?: string;
+  password?: string;
+}
