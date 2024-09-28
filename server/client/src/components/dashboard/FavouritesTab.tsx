@@ -2,7 +2,7 @@ import { TabProps } from "@/interfaces/dashboard";
 import SearchBar from "./SearchBar";
 import emptyFavouriteTab from "../../assets/empty_favourite_tab.svg";
 import { useEffect, useState } from "react";
-import { Note, Todo } from "@/interfaces/api";
+import { Content, Note, Todo } from "@/interfaces/api";
 import NoteCard from "./NoteCard";
 import { isNote } from "@/utils/utils";
 import TodoCard from "./TodoCard";
@@ -49,6 +49,65 @@ const FavouritesTab = ({
     setSearchString(searchString);
   };
 
+  const handleArchiveItem = async (
+    type: string,
+    id: string,
+    isArchived: boolean
+  ) => {
+    await handleArchive(type, id, isArchived);
+    getItems(searchString);
+  };
+
+  const handleDeleteItem = async (
+    type: string,
+    id: string,
+    isDeleted: boolean
+  ) => {
+    await handleDelete(type, id, isDeleted);
+    getItems(searchString);
+  };
+
+  const handleEditNoteItem = async (
+    id: string,
+    content: string,
+    title: string
+  ) => {
+    await handleNoteEdit(id, content, title);
+    getItems(searchString);
+  };
+
+  const handleEditTodoItem = async (
+    id: string,
+    content: Content[],
+    title: string
+  ) => {
+    await handleTodoEdit(id, content, title);
+    getItems(searchString);
+  };
+
+  const handleFavouriteItem = async (
+    type: string,
+    id: string,
+    isFavourite: boolean
+  ) => {
+    await handleFavourite(type, id, isFavourite);
+    getItems(searchString);
+  };
+
+  const handlePermanentDeleteItem = async (type: string, id: string) => {
+    await handlePermanentDelete(type, id);
+    getItems(searchString);
+  };
+
+  const handleTopicUpdateItem = async (
+    type: string,
+    id: string,
+    topicId: string | null
+  ) => {
+    await handleTopicUpdate(type, id, topicId);
+    getItems(searchString);
+  };
+
   return (
     <div className="flex flex-col gap-4 h-full">
       <SearchBar handleSearch={handleSearch} />
@@ -75,12 +134,12 @@ const FavouritesTab = ({
                   <NoteCard
                     key={item._id}
                     note={item}
-                    handleArchive={handleArchive}
-                    handleDelete={handleDelete}
-                    handleEdit={handleNoteEdit}
-                    handleFavourite={handleFavourite}
-                    handlePermanentDelete={handlePermanentDelete}
-                    handleTopicUpdate={handleTopicUpdate}
+                    handleArchive={handleArchiveItem}
+                    handleDelete={handleDeleteItem}
+                    handleEdit={handleEditNoteItem}
+                    handleFavourite={handleFavouriteItem}
+                    handlePermanentDelete={handlePermanentDeleteItem}
+                    handleTopicUpdate={handleTopicUpdateItem}
                     topics={topics}
                   />
                 );
@@ -89,12 +148,12 @@ const FavouritesTab = ({
                   <TodoCard
                     key={item._id}
                     todo={item}
-                    handleArchive={handleArchive}
-                    handleDelete={handleDelete}
-                    handleEdit={handleTodoEdit}
-                    handleFavourite={handleFavourite}
-                    handlePermanentDelete={handlePermanentDelete}
-                    handleTopicUpdate={handleTopicUpdate}
+                    handleArchive={handleArchiveItem}
+                    handleDelete={handleDeleteItem}
+                    handleEdit={handleEditTodoItem}
+                    handleFavourite={handleFavouriteItem}
+                    handlePermanentDelete={handlePermanentDeleteItem}
+                    handleTopicUpdate={handleTopicUpdateItem}
                     topics={topics}
                   />
                 );

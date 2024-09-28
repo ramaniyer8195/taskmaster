@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import AddItemModal from "../modals/AddItemModal";
 import NoteCard from "./NoteCard";
 import TodoCard from "./TodoCard";
-import { Note, Todo, Topic } from "@/interfaces/api";
+import { Content, Note, Todo, Topic } from "@/interfaces/api";
 import axios from "axios";
 import { isNote } from "@/utils/utils";
 
@@ -80,6 +80,65 @@ const HomeTab = ({
     }
   };
 
+  const handleArchiveItem = async (
+    type: string,
+    id: string,
+    isArchived: boolean
+  ) => {
+    await handleArchive(type, id, isArchived);
+    getItems(selectedTopic, searchString);
+  };
+
+  const handleDeleteItem = async (
+    type: string,
+    id: string,
+    isDeleted: boolean
+  ) => {
+    await handleDelete(type, id, isDeleted);
+    getItems(selectedTopic, searchString);
+  };
+
+  const handleEditNoteItem = async (
+    id: string,
+    content: string,
+    title: string
+  ) => {
+    await handleNoteEdit(id, content, title);
+    getItems(selectedTopic, searchString);
+  };
+
+  const handleEditTodoItem = async (
+    id: string,
+    content: Content[],
+    title: string
+  ) => {
+    await handleTodoEdit(id, content, title);
+    getItems(selectedTopic, searchString);
+  };
+
+  const handleFavouriteItem = async (
+    type: string,
+    id: string,
+    isFavourite: boolean
+  ) => {
+    await handleFavourite(type, id, isFavourite);
+    getItems(selectedTopic, searchString);
+  };
+
+  const handlePermanentDeleteItem = async (type: string, id: string) => {
+    await handlePermanentDelete(type, id);
+    getItems(selectedTopic, searchString);
+  };
+
+  const handleTopicUpdateItem = async (
+    type: string,
+    id: string,
+    topicId: string | null
+  ) => {
+    await handleTopicUpdate(type, id, topicId);
+    getItems(selectedTopic, searchString);
+  };
+
   return (
     <div className="flex flex-col gap-4 h-full">
       <SearchBar handleSearch={handleSearch} />
@@ -128,12 +187,12 @@ const HomeTab = ({
                   <NoteCard
                     key={item._id}
                     note={item}
-                    handleArchive={handleArchive}
-                    handleDelete={handleDelete}
-                    handleEdit={handleNoteEdit}
-                    handleFavourite={handleFavourite}
-                    handlePermanentDelete={handlePermanentDelete}
-                    handleTopicUpdate={handleTopicUpdate}
+                    handleArchive={handleArchiveItem}
+                    handleDelete={handleDeleteItem}
+                    handleEdit={handleEditNoteItem}
+                    handleFavourite={handleFavouriteItem}
+                    handlePermanentDelete={handlePermanentDeleteItem}
+                    handleTopicUpdate={handleTopicUpdateItem}
                     topics={topics}
                   />
                 );
@@ -142,12 +201,12 @@ const HomeTab = ({
                   <TodoCard
                     key={item._id}
                     todo={item}
-                    handleArchive={handleArchive}
-                    handleDelete={handleDelete}
-                    handleEdit={handleTodoEdit}
-                    handleFavourite={handleFavourite}
-                    handlePermanentDelete={handlePermanentDelete}
-                    handleTopicUpdate={handleTopicUpdate}
+                    handleArchive={handleArchiveItem}
+                    handleDelete={handleDeleteItem}
+                    handleEdit={handleEditTodoItem}
+                    handleFavourite={handleFavouriteItem}
+                    handlePermanentDelete={handlePermanentDeleteItem}
+                    handleTopicUpdate={handleTopicUpdateItem}
                     topics={topics}
                   />
                 );
