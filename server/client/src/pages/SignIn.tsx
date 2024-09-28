@@ -2,8 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import SocialButton from "@/components/common/SocialButton";
-import { Socials } from "@/interfaces/common";
 import HomePageText from "@/components/common/HomePageText";
 import useAuth from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
@@ -96,6 +94,8 @@ const SignIn = () => {
             Sign In
           </Button>
         </div>
+        {/*
+        ______Will implement this in future_______
         <div className="w-[85%] flex gap-2 items-center">
           <div className="w-full h-[2px] bg-muted" />
           <span className="min-w-max">or sign in with</span>
@@ -106,7 +106,7 @@ const SignIn = () => {
           <SocialButton type={Socials.FACEBOOK} />
           <SocialButton type={Socials.TWITTER} />
           <SocialButton type={Socials.LINKEDIN} />
-        </div>
+        </div> */}
         <p>
           Don't have an account? Click{" "}
           <Link to="/signUp">
