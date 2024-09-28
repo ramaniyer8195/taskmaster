@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import SocialButton from "@/components/common/SocialButton";
-import { Socials } from "@/interfaces/common";
 import HomePageText from "@/components/common/HomePageText";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -139,6 +137,8 @@ const SignUp = () => {
               Sign Up
             </Button>
           </div>
+          {/*
+          ______Will implement this in future_______
           <div className="w-[85%] flex gap-2 items-center">
             <div className="w-full h-[2px] bg-muted" />
             <span className="min-w-max">or sign up with</span>
@@ -149,7 +149,7 @@ const SignUp = () => {
             <SocialButton type={Socials.FACEBOOK} />
             <SocialButton type={Socials.TWITTER} />
             <SocialButton type={Socials.LINKEDIN} />
-          </div>
+          </div> */}
           <p>
             Already have an account? Click{" "}
             <Link to="/signIn">

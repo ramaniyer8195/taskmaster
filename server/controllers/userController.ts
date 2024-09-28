@@ -28,6 +28,7 @@ import { USER_ERRORS } from "../constants/errors";
 import { ValidationErrors } from "../interfaces/schema";
 import { createJwt } from "../utils/utils";
 import { COOKIE_MAX_AGE } from "../constants/constants";
+import nodemailer from "nodemailer";
 
 export const getUser: RequestHandler<{}, GetUserRes> = async (req, res) => {
   const token = req.cookies.jwt;
@@ -182,6 +183,23 @@ export const generateOtp: RequestHandler = async (req, res) => {
 
   try {
     await User.updateOne({ _id }, { $set: { otp } });
+    const user = await User.findOne({ _id });
+
+    // send that otp as a mail
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    await transporter.sendMail({
+      from: 'Taskmaster" <ramaniyer8195@gmail.com>',
+      to: user?.email,
+      subject: "OTP from Taskmaster",
+      text: `Your OTP for verification is: ${otp}`,
+    });
 
     res.status(200).json({ message: "OTP sent", error: {} });
   } catch (err) {
