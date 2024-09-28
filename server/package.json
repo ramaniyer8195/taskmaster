@@ -4,7 +4,9 @@
   "main": "server.ts",
   "scripts": {
     "debug": "nodemon --inspect-brk --require ts-node/register server.ts",
-    "dev": "nodemon server.ts"
+    "dev": "nodemon server.ts",
+    "build": "npm install --prefix ./client && npm run build --prefix ./client && npm install",
+    "prod": "node --require ts-node/register server.ts"
   },
   "keywords": [],
   "author": "",
