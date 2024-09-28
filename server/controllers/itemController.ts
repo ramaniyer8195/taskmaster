@@ -115,18 +115,18 @@ export const modifyItem: RequestHandler<
     if (type === "note") {
       const modifyRes = await modifyNote(data, itemId, _id);
 
-      if (modifyRes.error) {
-        res.status(400).json(modifyRes);
-      } else {
+      if (isEmpty(modifyRes.error)) {
         res.status(200).json(modifyRes);
+      } else {
+        res.status(400).json(modifyRes);
       }
     } else {
       const modifyRes = await modifyTodo(data, itemId, _id);
 
-      if (modifyRes.error) {
-        res.status(400).json(modifyRes);
-      } else {
+      if (isEmpty(modifyRes.error)) {
         res.status(200).json(modifyRes);
+      } else {
+        res.status(400).json(modifyRes);
       }
     }
   } catch (err) {

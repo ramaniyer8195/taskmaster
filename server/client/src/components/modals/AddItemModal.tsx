@@ -20,13 +20,27 @@ import {
   SelectValue,
 } from "../ui/select";
 
-const AddItemModal = ({ open, setOpen, topics }: AddItemModalProps) => {
+const AddItemModal = ({
+  open,
+  setOpen,
+  topics,
+  handleAddItem: handleAdd,
+}: AddItemModalProps) => {
   const [type, setType] = useState("note");
   const [topic, setTopic] = useState("Uncategorized");
   const [title, setTitle] = useState("");
+  const [error, setError] = useState("");
 
   const handleAddItem = () => {
-    console.log(`Added Item type: ${type} topic: ${topic} title: ${title}`);
+    if (title === "") {
+      setError("Title cannot be empty");
+      return;
+    }
+
+    const selectedTopic = topics.find((topicItem) => topicItem.title === topic);
+    const topicId = selectedTopic ? selectedTopic._id : null;
+
+    handleAdd(title, topicId, type);
     setType("note");
     setTopic("Uncategorized");
     setTitle("");
@@ -40,8 +54,17 @@ const AddItemModal = ({ open, setOpen, topics }: AddItemModalProps) => {
     setOpen(false);
   };
 
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      setType("note");
+      setTopic("Uncategorized");
+      setTitle("");
+    }
+    setOpen(open);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="link">
           <div className="flex items-center gap-2">
@@ -86,7 +109,7 @@ const AddItemModal = ({ open, setOpen, topics }: AddItemModalProps) => {
               <SelectContent>
                 <SelectItem value="Uncategorized">Uncategorized</SelectItem>
                 {topics.map((topic, id) => (
-                  <SelectItem key={id} value={topic.title}>
+                  <SelectItem key={id} id={topic._id} value={topic.title}>
                     {topic.title}
                   </SelectItem>
                 ))}
@@ -99,8 +122,14 @@ const AddItemModal = ({ open, setOpen, topics }: AddItemModalProps) => {
               id="title"
               className="col-span-3"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setError("");
+              }}
             />
+            {error !== "" && (
+              <p className="text-red-500 text-xs font-bold">{error}</p>
+            )}
           </div>
         </div>
         <DialogFooter className="justify-end">

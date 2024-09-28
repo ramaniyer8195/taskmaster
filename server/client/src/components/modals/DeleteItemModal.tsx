@@ -18,9 +18,8 @@ const DeleteItemModal = ({
   handleDelete,
 }: DeleteItemModalProps) => {
   const handleDeleteItem = () => {
-    console.log(`Deleted Item`);
     setOpen(false);
-    handleDelete(id, true);
+    handleDelete(type, id, true);
   };
 
   const handleClose = () => {

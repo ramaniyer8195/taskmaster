@@ -41,7 +41,7 @@ const RecentlyDeletedTab = ({
 
   useEffect(() => {
     getItems(searchString);
-  }, [searchString]);
+  }, [searchString, topics]);
 
   const handleSearch = (searchString: string) => {
     setSearchString(searchString);

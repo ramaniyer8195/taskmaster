@@ -44,7 +44,7 @@ const TodoCard = ({
 
   return (
     <Card
-      className={`border-${todo.color} border-t-8 max-h-[350px]`}
+      className={`border-${todo.color || "primary"} border-t-8 max-h-[350px]`}
       onMouseEnter={() => setShowFooter(true)}
       onMouseLeave={() => setShowFooter(false)}
     >

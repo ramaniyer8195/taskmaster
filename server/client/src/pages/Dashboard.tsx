@@ -115,32 +115,105 @@ const Dashboard = () => {
     }
   };
 
-  const handleArchive = (id: string, isArchived: boolean) => {
-    console.log(id, isArchived);
+  const handleArchive = async (
+    type: string,
+    id: string,
+    isArchived: boolean
+  ) => {
+    try {
+      await axios.put("/api/item/modifyItem", {
+        data: { isArchived },
+        type,
+        itemId: id,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleDelete = (id: string, isDeleted: boolean) => {
-    console.log(id, isDeleted);
+  const handleDelete = async (type: string, id: string, isDeleted: boolean) => {
+    try {
+      await axios.put("/api/item/modifyItem", {
+        data: { isDeleted },
+        type,
+        itemId: id,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleNoteEdit = (id: string, content: string, title: string) => {
-    console.log(id, content, title);
+  const handleNoteEdit = async (id: string, content: string, title: string) => {
+    try {
+      await axios.put("/api/item/modifyItem", {
+        data: { content, title },
+        type: "note",
+        itemId: id,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleTodoEdit = (id: string, content: Content[], title: string) => {
-    console.log(id, content, title);
+  const handleTodoEdit = async (
+    id: string,
+    content: Content[],
+    title: string
+  ) => {
+    try {
+      await axios.put("/api/item/modifyItem", {
+        data: { content, title },
+        type: "todo",
+        itemId: id,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleFavourite = (id: string, isFavourite: boolean) => {
-    console.log(id, isFavourite);
+  const handleFavourite = async (
+    type: string,
+    id: string,
+    isFavourite: boolean
+  ) => {
+    try {
+      await axios.put("/api/item/modifyItem", {
+        data: { isFavourite },
+        type,
+        itemId: id,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handlePermanentDelete = (id: string) => {
-    console.log(id);
+  const handlePermanentDelete = async (type: string, id: string) => {
+    try {
+      await axios.delete("/api/item/deleteItem", {
+        data: {
+          type,
+          itemId: id,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleTopicUpdate = (id: string, topicId: string) => {
-    console.log(id, topicId);
+  const handleTopicUpdate = async (
+    type: string,
+    id: string,
+    topicId: string | null
+  ) => {
+    try {
+      await axios.put("/api/item/modifyItem", {
+        data: { topicId },
+        type,
+        itemId: id,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

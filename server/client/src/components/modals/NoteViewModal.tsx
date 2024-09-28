@@ -52,7 +52,7 @@ const NoteViewModal = ({
           <div className={`h-[15px] w-[15px] rounded-full bg-${note.color}`} />{" "}
           <span>{note.topic}</span>
         </div>
-        <div className="grid gap-4 py-4 max-h-[60vh] overflow-y-auto">
+        <div className="grid py-4 max-h-[60vh] overflow-y-auto whitespace-pre-line">
           {note.content}
         </div>
         <DialogFooter className="justify-between ">

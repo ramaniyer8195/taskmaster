@@ -48,7 +48,7 @@ const HomeTab = ({
 
   useEffect(() => {
     getItems(selectedTopic, searchString);
-  }, [selectedTopic, searchString]);
+  }, [selectedTopic, searchString, topics]);
 
   const handleTopicChange = (
     e: MouseEvent<HTMLButtonElement>,
@@ -60,6 +60,24 @@ const HomeTab = ({
 
   const handleSearch = (searchString: string) => {
     setSearchString(searchString);
+  };
+
+  const handleAddItem = async (
+    title: string,
+    topic: string | null,
+    type: string
+  ) => {
+    try {
+      await axios.post("/api/item/addItem", {
+        title,
+        type,
+        topicId: topic,
+      });
+
+      getItems(selectedTopic, searchString);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -87,9 +105,10 @@ const HomeTab = ({
           open={openAddModal}
           setOpen={setOpenAddModal}
           topics={topics}
+          handleAddItem={handleAddItem}
         />
       </div>
-      <div>
+      <div className="h-[85%] overflow-y-auto">
         {!items.length && (
           <div className="flex flex-col gap-2">
             <img src={emptyHomeTab} alt="" className="h-[450px]" />
@@ -102,7 +121,7 @@ const HomeTab = ({
           </div>
         )}
         {items.length > 0 && (
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 mr-4">
             {items.map((item) => {
               if (isNote(item)) {
                 return (

@@ -43,7 +43,7 @@ const NoteEditModal = ({
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-bold">
             <div
-              className="focus-visible:outline-none"
+              className="focus-visible:outline-none whitespace-pre-line"
               contentEditable
               onBlur={(e) => setNoteTitle(e.currentTarget.innerText)}
               suppressContentEditableWarning
@@ -53,8 +53,12 @@ const NoteEditModal = ({
           </DialogTitle>
         </DialogHeader>
         <div className="flex items-center gap-2">
-          <div className={`h-[15px] w-[15px] rounded-full bg-${note.color}`} />{" "}
-          <span>{note.topic}</span>{" "}
+          <div
+            className={`h-[15px] w-[15px] rounded-full bg-${
+              note.color || "primary"
+            }`}
+          />{" "}
+          <span>{note.topic || "Uncategorized"}</span>{" "}
           <span className="text-primary text-lg">
             <UpdateTopicModal
               open={openChangeTopicModal}
@@ -62,11 +66,13 @@ const NoteEditModal = ({
               handleTopicChange={handleTopicUpdate}
               itemId={note._id}
               topics={topics}
+              selectedTopic={note.topic}
+              type={note.type}
             />
           </span>
         </div>
         <div
-          className="grid gap-4 py-4 max-h-[60vh] overflow-y-auto focus-visible:outline-none"
+          className="grid py-4 max-h-[60vh] overflow-y-auto focus-visible:outline-none whitespace-pre-line"
           contentEditable
           onBlur={(e) => setNoteContent(e.currentTarget.innerText)}
           suppressContentEditableWarning
