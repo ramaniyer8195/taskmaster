@@ -1,4 +1,5 @@
-export const formatDate = (date: Date, isEditDate = false): string => {
+export const formatDate = (dateString: string, isEditDate = false): string => {
+  const date = new Date(dateString);
   const day = date.getDate();
   const month = date.toLocaleString("default", {
     month: isEditDate ? "short" : "long",

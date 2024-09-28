@@ -1,5 +1,5 @@
 import { FaSignOutAlt } from "react-icons/fa";
-import userImage from "../../assets/temp/user_img.png";
+import avatar_temp from "../../assets/temp/avatar_1.jpg";
 import { MENU } from "@/constants/constants";
 import { SidebarProps } from "@/interfaces/dashboard";
 import AddTopicModal from "../modals/AddTopicModal";
@@ -7,20 +7,28 @@ import { useState } from "react";
 import TopicItem from "./TopicItem";
 
 const Sidebar = ({
+  user,
   selected,
   handleMenuChange,
   topics,
   handleSignOut,
+  handleEditTopic,
+  handleAddTopic,
+  handleDeleteTopic,
 }: SidebarProps) => {
-  const [openTopicModal, setOpenTopicModal] = useState(false);
+  const [addTopicModal, setAddTopicModal] = useState(false);
 
   return (
     <div className="flex flex-col justify-between h-full">
       <div className="flex flex-col gap-10">
         <div className="flex items-center justify-center gap-3 self-start w-full px-2">
-          <img src={userImage} alt="" className="h-[50px] rounded-full" />
+          <img
+            src={user?.avatar || avatar_temp}
+            alt=""
+            className="h-[50px] w-[50px] object-cover rounded-full"
+          />
           <h2 className="text-xl font-display font-bold text-ellipsis overflow-hidden text-nowrap">
-            Anson Abraham
+            {user?.name}
           </h2>
         </div>
         <div className="flex flex-col w-full">
@@ -50,10 +58,19 @@ const Sidebar = ({
           <h2 className="text-xl font-display font-bold">Topics</h2>
           <div className="flex flex-col gap-2">
             {topics.map((topic) => (
-              <TopicItem topic={topic} key={topic._id} />
+              <TopicItem
+                topic={topic}
+                key={topic._id}
+                handleEditTopic={handleEditTopic}
+                handleDeleteTopic={handleDeleteTopic}
+              />
             ))}
           </div>
-          <AddTopicModal open={openTopicModal} setOpen={setOpenTopicModal} />
+          <AddTopicModal
+            open={addTopicModal}
+            setOpen={setAddTopicModal}
+            handleAddTopic={handleAddTopic}
+          />
         </div>
       </div>
       <div

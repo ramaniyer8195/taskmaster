@@ -555,7 +555,7 @@ const TodoEditModal = ({
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-bold">
             <div
-              className="focus-visible:outline-none"
+              className="focus-visible:outline-none whitespace-pre-line"
               contentEditable
               onBlur={(e) => setTodoTitle(e.currentTarget.innerText)}
               suppressContentEditableWarning
@@ -565,8 +565,12 @@ const TodoEditModal = ({
           </DialogTitle>
         </DialogHeader>
         <div className="flex items-center gap-2">
-          <div className={`h-[15px] w-[15px] rounded-full bg-${todo.color}`} />{" "}
-          <span>{todo.topic}</span>{" "}
+          <div
+            className={`h-[15px] w-[15px] rounded-full bg-${
+              todo.color || "primary"
+            }`}
+          />{" "}
+          <span>{todo.topic || "Uncategorized"}</span>{" "}
           <span className="text-primary text-lg">
             <UpdateTopicModal
               open={openChangeTopicModal}
@@ -574,6 +578,8 @@ const TodoEditModal = ({
               handleTopicChange={handleTopicUpdate}
               itemId={todo._id}
               topics={topics}
+              selectedTopic={todo.topic}
+              type={todo.type}
             />
           </span>
         </div>

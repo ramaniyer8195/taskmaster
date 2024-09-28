@@ -46,7 +46,7 @@ const SubTodoItem = ({
         <div
           className={`focus-visible:outline-none ${
             isCompleted ? "line-through text-gray-400" : ""
-          } w-full`}
+          } w-full whitespace-pre-line`}
           contentEditable
           onBlur={onTodoBlur}
           suppressContentEditableWarning

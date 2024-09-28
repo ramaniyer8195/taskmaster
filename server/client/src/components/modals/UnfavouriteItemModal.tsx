@@ -18,9 +18,8 @@ const UnfavouriteItemModal = ({
   handleFavourite,
 }: FavouriteItemModalProps) => {
   const handleUnfavouriteItem = () => {
-    console.log(`UnFavourited Item`);
     setOpen(false);
-    handleFavourite(id, false);
+    handleFavourite(type, id, false);
   };
 
   const handleClose = () => {

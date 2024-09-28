@@ -18,9 +18,8 @@ const DeletePermanentlyModal = ({
   handlePermanentDelete,
 }: DeletePermanentlyModalProps) => {
   const handleDeletePermanently = () => {
-    console.log(`Permanent Deleted Item`);
     setOpen(false);
-    handlePermanentDelete(id);
+    handlePermanentDelete(type, id);
   };
 
   const handleClose = () => {

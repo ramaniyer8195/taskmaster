@@ -46,7 +46,7 @@ const NoteCard = ({
 
   return (
     <Card
-      className={`border-${note.color} border-t-8 max-h-[350px]`}
+      className={`border-${note.color || "primary"} border-t-8 max-h-[350px]`}
       onMouseEnter={() => setShowFooter(true)}
       onMouseLeave={() => setShowFooter(false)}
     >
@@ -66,7 +66,6 @@ const NoteCard = ({
           {note.content.split("\n").map((line, index) => (
             <Fragment key={index}>
               <p>{line}</p>
-              <br />
             </Fragment>
           ))}
         </p>

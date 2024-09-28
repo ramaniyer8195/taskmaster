@@ -5,22 +5,36 @@ export interface ModalProps {
   setOpen: (openState: boolean) => void;
 }
 
+export interface AddTopicModalProps extends ModalProps {
+  handleAddTopic: (topicTitle: string, topicColor: string) => void;
+}
+
 export interface EditTopicModalProps extends ModalProps {
   topic: Topic;
+  handleEditTopic: (
+    topicTitle: string,
+    topicColor: string,
+    topicId: string
+  ) => void;
 }
 
 export interface UpdateTopicModalProps extends ModalProps {
   topics: Topic[];
+  selectedTopic: string | null;
   itemId: string;
-  handleTopicChange: (id: string, topicId: string) => void;
+  type: string;
+  handleTopicChange: (type: string, id: string, topicId: string | null) => void;
 }
 
 export interface DeleteTopicModalProps extends ModalProps {
   title: string;
+  topicId: string;
+  handleDeleteTopic: (topicId: string) => void;
 }
 
 export interface AddItemModalProps extends ModalProps {
   topics: Topic[];
+  handleAddItem: (title: string, topic: string | null, type: string) => void;
 }
 
 export interface ColorPickerProps {
@@ -34,43 +48,43 @@ export interface ItemModalProps extends ModalProps {
 }
 
 export interface DeleteItemModalProps extends ItemModalProps {
-  handleDelete: (id: string, isDeleted: boolean) => void;
+  handleDelete: (type: string, id: string, isDeleted: boolean) => void;
 }
 
 export interface DeletePermanentlyModalProps extends ItemModalProps {
-  handlePermanentDelete: (id: string) => void;
+  handlePermanentDelete: (type: string, id: string) => void;
 }
 
 export interface ArchiveItemModalProps extends ItemModalProps {
-  handleArchive: (id: string, isArchived: boolean) => void;
+  handleArchive: (type: string, id: string, isArchived: boolean) => void;
 }
 
 export interface FavouriteItemModalProps extends ItemModalProps {
-  handleFavourite: (id: string, isFavourite: boolean) => void;
+  handleFavourite: (type: string, id: string, isFavourite: boolean) => void;
 }
 
 export interface NoteViewModalProps extends ModalProps {
   note: Note;
-  handleDelete: (id: string, isDeleted: boolean) => void;
-  handleArchive: (id: string, isArchived: boolean) => void;
-  handleFavourite: (id: string, isFavourite: boolean) => void;
+  handleDelete: (type: string, id: string, isDeleted: boolean) => void;
+  handleArchive: (type: string, id: string, isArchived: boolean) => void;
+  handleFavourite: (type: string, id: string, isFavourite: boolean) => void;
 }
 
 export interface NoteEditModalProps extends ModalProps {
   note: Note;
   topics: Topic[];
   handleEdit: (id: string, content: string, title: string) => void;
-  handleTopicUpdate: (id: string, topicId: string) => void;
+  handleTopicUpdate: (type: string, id: string, topicId: string | null) => void;
 }
 
 export interface TodoEditModalProps extends ModalProps {
   todo: Todo;
   topics: Topic[];
   handleEdit: (id: string, content: Content[], title: string) => void;
-  handleTopicUpdate: (id: string, topicId: string) => void;
-  handleDelete: (id: string, isDeleted: boolean) => void;
-  handleArchive: (id: string, isArchived: boolean) => void;
-  handleFavourite: (id: string, isFavourite: boolean) => void;
+  handleTopicUpdate: (type: string, id: string, topicId: string | null) => void;
+  handleDelete: (type: string, id: string, isDeleted: boolean) => void;
+  handleArchive: (type: string, id: string, isArchived: boolean) => void;
+  handleFavourite: (type: string, id: string, isFavourite: boolean) => void;
 }
 
 export interface BaseTodoItemProps {

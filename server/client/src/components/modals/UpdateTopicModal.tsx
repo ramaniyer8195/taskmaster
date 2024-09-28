@@ -23,19 +23,22 @@ const UpdateTopicModal = ({
   open,
   setOpen,
   topics,
+  selectedTopic: prevTopic,
   itemId,
+  type,
   handleTopicChange,
 }: UpdateTopicModalProps) => {
-  const [selectedTopic, setSelectedTopic] = useState(topics[0].title);
+  const [selectedTopic, setSelectedTopic] = useState(
+    prevTopic || "Uncategorized"
+  );
 
   const handleChangeTopic = () => {
-    const selectedTopicId = topics.filter(
-      (topic) => topic.title === selectedTopic
-    )[0]._id;
+    const selectedTopicId =
+      topics.filter((topic) => topic.title === selectedTopic)[0]?._id || null;
     console.log(
       `update Topic id: ${selectedTopicId} title: ${selectedTopic} for item: ${itemId}`
     );
-    handleTopicChange(itemId, selectedTopicId);
+    handleTopicChange(type, itemId, selectedTopicId);
     setSelectedTopic(topics[0].title);
     setOpen(false);
   };

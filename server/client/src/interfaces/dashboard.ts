@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Content, Note, Todo, Topic } from "./api";
+import { Content, Note, Todo, Topic, User } from "./api";
 
 export enum Menu {
   HOME = "Home",
@@ -16,30 +16,47 @@ export interface MenuItem {
 }
 
 export interface SidebarProps {
+  user: User | null;
   selected: Menu;
   handleMenuChange: (e: MouseEvent<HTMLDivElement>) => void;
   topics: Topic[];
   handleSignOut: () => void;
+  handleEditTopic: (
+    topicTitle: string,
+    topicColor: string,
+    topicId: string
+  ) => void;
+  handleAddTopic: (topicTitle: string, topicColor: string) => void;
+  handleDeleteTopic: (topicId: string) => void;
 }
 
 export interface TabProps {
-  items: (Note | Todo)[];
-}
-
-export interface HomeTabProps extends TabProps {
   topics: Topic[];
+  handleDelete: (type: string, id: string, isDeleted: boolean) => void;
+  handleArchive: (type: string, id: string, isArchived: boolean) => void;
+  handleFavourite: (type: string, id: string, isFavourite: boolean) => void;
+  handleTopicUpdate: (type: string, id: string, topicId: string | null) => void;
+  handlePermanentDelete: (type: string, id: string) => void;
+  handleNoteEdit: (id: string, content: string, title: string) => void;
+  handleTodoEdit: (id: string, content: Content[], title: string) => void;
 }
 
 export interface TopicItemProps {
   topic: Topic;
+  handleEditTopic: (
+    topicTitle: string,
+    topicColor: string,
+    topicId: string
+  ) => void;
+  handleDeleteTopic: (topicId: string) => void;
 }
 
 interface ItemProps {
-  handleDelete: (id: string, isDeleted: boolean) => void;
-  handleArchive: (id: string, isArchived: boolean) => void;
-  handleFavourite: (id: string, isFavourite: boolean) => void;
-  handleTopicUpdate: (id: string, topicId: string) => void;
-  handlePermanentDelete: (id: string) => void;
+  handleDelete: (type: string, id: string, isDeleted: boolean) => void;
+  handleArchive: (type: string, id: string, isArchived: boolean) => void;
+  handleFavourite: (type: string, id: string, isFavourite: boolean) => void;
+  handleTopicUpdate: (type: string, id: string, topicId: string | null) => void;
+  handlePermanentDelete: (type: string, id: string) => void;
   topics: Topic[];
 }
 

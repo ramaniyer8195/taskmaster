@@ -12,6 +12,7 @@ export const USER_ERRORS = {
   OTP_DOESNT_MATCH: "OTP does not match",
   NOTHING_TO_UPDATE: "Nothing to update",
   OLD_NEW_SAME: "Old and new password cannot be the same",
+  EMPTY_NAME: "Name cannot be empty",
 };
 
 export const TOPIC_ERRORS = {

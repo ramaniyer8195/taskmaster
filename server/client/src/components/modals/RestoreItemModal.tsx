@@ -18,9 +18,8 @@ const RestoreItemModal = ({
   handleDelete,
 }: DeleteItemModalProps) => {
   const handleRestoreItem = () => {
-    console.log(`Restored Item`);
     setOpen(false);
-    handleDelete(id, false);
+    handleDelete(type, id, false);
   };
 
   const handleClose = () => {

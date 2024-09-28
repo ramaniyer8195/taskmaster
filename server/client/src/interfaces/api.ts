@@ -20,8 +20,8 @@ export interface Note {
   _id: string;
   title: string;
   content: string;
-  createdAt: Date;
-  editedAt: Date;
+  createdAt: string;
+  editedAt: string;
   isDeleted: boolean;
   isArchived: boolean;
   isFavourite: boolean;
@@ -46,8 +46,8 @@ export interface Todo {
   _id: string;
   title: string;
   content: Content[];
-  createdAt: Date;
-  editedAt: Date;
+  createdAt: string;
+  editedAt: string;
   isDeleted: boolean;
   isArchived: boolean;
   isFavourite: boolean;
@@ -79,4 +79,15 @@ export interface OtpErrors {
 export interface SignInErrors {
   email?: string;
   password?: string;
+}
+
+export interface AccountUpdateErrors {
+  name?: string;
+  update?: string;
+}
+
+export interface PasswordErrors {
+  oldPassword?: string;
+  newPassword?: string;
+  confirmPassword?: string;
 }

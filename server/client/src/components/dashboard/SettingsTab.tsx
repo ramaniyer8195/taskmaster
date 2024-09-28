@@ -11,15 +11,19 @@ import {
 import { SelectTrigger } from "../ui/select";
 import { useTheme } from "../../components/providers/ThemeProvider";
 import { Label } from "@radix-ui/react-label";
-import { GoVerified, GoUnverified } from "react-icons/go";
-import OtpVerifyForm from "../common/OtpVerifyForm";
+import { GoVerified } from "react-icons/go";
+import { User } from "@/interfaces/api";
 
-const SettingsTab = () => {
+const SettingsTab = ({
+  user,
+  getCurrentUser,
+}: {
+  user: User | null;
+  getCurrentUser: () => void;
+}) => {
   const { setTheme } = useTheme();
-  const [isVerified] = useState(true);
-  const [isVerificationInProgress, setIsVerificationInProgress] =
-    useState(false);
-  const [currTheme, setCurrTheme] = useState("light");
+  const prevTheme = localStorage.getItem("vite-ui-theme");
+  const [currTheme, setCurrTheme] = useState(prevTheme || "light");
   const [accountToggle, setAccountToggle] = useState(true);
 
   const handleThemeChange = (value: "light" | "dark") => {
@@ -60,7 +64,7 @@ const SettingsTab = () => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="account">
-            <AccountCard />
+            <AccountCard user={user} getCurrentUser={getCurrentUser} />
           </TabsContent>
           <TabsContent value="password">
             <PasswordCard />
@@ -89,29 +93,9 @@ const SettingsTab = () => {
           <div>
             <h2 className="font-display text-2xl font-bold">Account Status</h2>
             <p className="flex items-center gap-2">
-              {isVerified ? (
-                <>
-                  <span>Verified</span>
-                  <GoVerified className="text-green-500" />
-                </>
-              ) : (
-                <>
-                  <span>Verification Pending</span>
-                  <GoUnverified className="text-red-500" />
-                  <div>
-                    Click{" "}
-                    <span
-                      className="text-primary underline cursor-pointer"
-                      onClick={() => setIsVerificationInProgress(true)}
-                    >
-                      here
-                    </span>{" "}
-                    to verify your account
-                  </div>
-                </>
-              )}
+              <span>Verified</span>
+              <GoVerified className="text-green-500" />
             </p>
-            {isVerificationInProgress && <OtpVerifyForm />}
           </div>
         </div>
       </div>

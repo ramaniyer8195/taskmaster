@@ -18,9 +18,8 @@ const UnarchiveItemModal = ({
   handleArchive,
 }: ArchiveItemModalProps) => {
   const handleUnarchiveItem = () => {
-    console.log(`Unarchived Item`);
     setOpen(false);
-    handleArchive(id, false);
+    handleArchive(type, id, false);
   };
 
   const handleClose = () => {

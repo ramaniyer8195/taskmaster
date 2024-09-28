@@ -18,9 +18,8 @@ const ArchiveItemModal = ({
   handleArchive,
 }: ArchiveItemModalProps) => {
   const handleArchiveItem = () => {
-    console.log(`Archived Item`);
     setOpen(false);
-    handleArchive(id, true);
+    handleArchive(type, id, true);
   };
 
   const handleClose = () => {
